@@ -875,7 +875,7 @@
                         <strong>seenivasan0206</strong>
                     </div>
                 </a>
-                <a href="Seenivasan-CV.pdf" download class="contact-link">
+                <a href="#" class="contact-link" onclick="confirmDownload(event)">
                     <div class="icon"><i class="fas fa-file-download"></i></div>
                     <div class="text">
                         <span>Download</span>
@@ -894,6 +894,20 @@
         </div>
         <p class="footer-text">© 2026 Seenivasan V. Built with passion.</p>
     </footer>
+
+    <script>
+        function confirmDownload(event) {
+            event.preventDefault();
+            if (confirm("Do you want to download my resume?")) {
+                var link = document.createElement('a');
+                link.href = 'Seenivasan-CV.pdf';
+                link.download = 'Seenivasan-CV.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    </script>
 
 </body>
 
