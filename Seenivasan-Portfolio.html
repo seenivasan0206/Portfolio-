@@ -102,7 +102,7 @@
         }
         
         section {
-            animation: fadeInUp 0.8s ease-out;
+            animation: fadeInUp 0.8s ease-out both;
             max-width: 1100px;
             margin: 2rem auto;
             padding: 4rem 2rem;
@@ -648,6 +648,88 @@
             font-size: 0.875rem;
             color: rgba(255, 255, 255, 0.5);
         }
+        /* Experience */
+        
+        .experience-list {
+            display: block;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .experience-item {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #0f172a;
+        }
+        
+        .experience-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .experience-role {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        
+        .experience-company {
+            font-size: 0.95rem;
+            color: #3b82f6;
+            margin-bottom: 0.25rem;
+        }
+        
+        .experience-duration {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+        }
+        
+        .experience-item ul {
+            list-style: disc;
+            padding-left: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #334155;
+        }
+        
+        .experience-item li {
+            margin-bottom: 0.5rem;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        
+        .experience-item li a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        
+        .experience-item li a:hover {
+            text-decoration: underline;
+        }
+        
+        .experience-summary {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
         /* Responsive */
         
         @media (max-width: 768px) {
@@ -682,6 +764,7 @@
         <div class="nav-links" style="margin: 0 auto;">
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
@@ -775,6 +858,35 @@
             </div>
         </div>
     </section>
+    <section id="experience">
+        <div class="section-header">
+            <h2>Work Experience & Training</h2>
+            <p>Building skills through hands-on training and real-world projects</p>
+        </div>
+        <div class="experience-list">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-role">Data Analyst Trainee</div>
+                        <div class="experience-company">C Cube Technologies</div>
+                        <div class="experience-duration">Jan 2026 – Present</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Completed intensive training covering Excel, SQL, Python, and Power BI for end-to-end data analysis and visualization.</li>
+                    <li>Built a <a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank">Banking Loan Approval & Credit Risk Analytics Dashboard</a> analyzing approval trends, customer demographics, and lending patterns.</li>
+                    <li>Developed a <a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank">Mobile & Laptop Sales Dashboard</a> to track KPIs, visualize product performance, and identify sales trends across categories and
+                        regions.
+                    </li>
+                    <li>Applied data cleaning and ETL techniques to transform raw datasets into structured, actionable insights for business decision-making.</li>
+                    <li>Designed interactive dashboards with KPI cards, slicers, and pivot charts to communicate analytical findings effectively to stakeholders.</li>
+                </ul>
+                <div class="experience-summary">
+                    Currently training as a Data Analyst Trainee at C Cube Technologies (Jan 2026 – Present), focusing on Excel, SQL, Python, and Power BI. Completed two hands-on dashboards analyzing loan approval risk and mobile/laptop sales performance.
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="projects">
         <div class="section-header">
             <h2>Projects</h2>
@@ -841,6 +953,22 @@
                 <div class="project-tech">
                     <span>Excel</span>
                     <span>Dashboard</span>
+                    <span>Data Visualization</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon"><i class="fas fa-university"></i></div>
+                    <div class="project-links">
+                        <a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <h3><a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank" style="color: var(--primary); text-decoration: none;">Banking Loan Approval & Credit Risk Analytics Dashboard</a></h3>
+                <p>Analyzes loan application data to identify approval trends, customer demographics, lending patterns, and loan performance metrics.</p>
+                <div class="project-tech">
+                    <span>Excel</span>
+                    <span>Pivot Tables</span>
                     <span>Data Visualization</span>
                 </div>
             </div>
