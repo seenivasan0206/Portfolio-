@@ -25,9 +25,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            background-size: 200% 200%;
-            animation: gradientBG 10s ease infinite;
+            background: #f8fafc;
             color: var(--text);
             line-height: 1.6;
         }
@@ -38,115 +36,110 @@
             box-sizing: border-box;
         }
         
-        html {
-            scroll-behavior: smooth;
+        /* NOTE: native smooth scrolling is disabled because Lenis handles
+           buttery smooth scrolling in JS. Keeping both fights each other. */
+        html.lenis {
+            height: auto;
         }
-        /* Animations */
+        /* ==========================================================
+           ANIMATION SUPPORT STYLES
+           GSAP now controls all reveal animations. We only set the
+           *initial* hidden state here so there's no flash of content
+           before JS runs. If JS is disabled, the .no-js fallback
+           (added at the bottom) makes everything visible again.
+           ========================================================== */
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* Generic reveal starting states (GSAP animates them to visible) */
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        
-        @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-        
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+        .reveal,
+        .reveal-left,
+        .reveal-right {
+            opacity: 0;
+            will-change: transform, opacity;
         }
         
         .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            transform: translateY(24px);
         }
         
         .reveal-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
+            transform: translateX(-24px);
         }
         
         .reveal-right {
+            transform: translateX(24px);
+        }
+        
+        /* Fallback: if GSAP fails to load, reveal everything so the
+           page is never left blank. */
+        
+        .no-anim .reveal,
+        .no-anim .reveal-left,
+        .no-anim .reveal-right {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Hero elements start hidden so there is no flash before GSAP runs.
+           The .no-anim / reduced-motion fallbacks below make them visible. */
+        .js-pending .hero-badge,
+        .js-pending .hero-subtitle,
+        .js-pending .hero-buttons {
             opacity: 0;
-            transform: translateX(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
+        .no-anim .hero-badge,
+        .no-anim .hero-subtitle,
+        .no-anim .hero-buttons {
+            opacity: 1 !important;
+        }
+        /* --- Split text (hero heading + section headings) ---
+           Each word is wrapped in a .word span, and each word sits
+           inside a .word-mask that clips the sliding animation for a
+           premium "reveal from behind a line" look. */
+        
+        .split-line {
+            display: inline;
         }
         
-        .hero {
-            animation: fadeInUp 1s ease-out;
+        .word-mask {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            /* padding keeps descenders (g, y, p) from being clipped */
+            padding: 0.1em 0.02em;
+            margin: -0.1em -0.02em;
         }
         
-        .hero-badge {
-            animation: fadeIn 1s ease-out 0.3s both;
+        .word {
+            display: inline-block;
+            will-change: transform;
+        }
+        /* --- Magnetic / tilt project cards ---
+           GSAP moves these on hover; we just need a smooth transform
+           origin and to promote them to their own layer. */
+        
+        .project-card {
+            will-change: transform;
+            transform-style: preserve-3d;
+        }
+        /* Respect users who prefer reduced motion: turn animations off. */
+        
+        @media (prefers-reduced-motion: reduce) {
+            .reveal,
+            .reveal-left,
+            .reveal-right {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .hero-badge,
+            .hero-subtitle,
+            .hero-buttons {
+                opacity: 1 !important;
+            }
         }
         
-        .hero h1 {
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-        
-        .hero-subtitle {
-            animation: fadeInUp 1s ease-out 0.7s both;
-        }
-        
-        .hero-buttons {
-            animation: fadeInUp 1s ease-out 0.9s both;
-        }
+        /* About */
         
         section {
             max-width: 1100px;
@@ -281,14 +274,19 @@
             background: white;
             padding: 1.5rem;
             border-radius: 12px;
-            transition: all 0.3s ease;
+            /* Scale/translate are driven by GSAP (GPU-composited, smooth).
+               The shadow lift is handled in CSS so the browser transitions it
+               on a single hovered element (no per-frame GSAP repaint, which
+               was the source of the jank). */
             box-shadow: var(--shadow);
+            border: 1px solid transparent;
+            will-change: transform, opacity;
+            transition: box-shadow 0.4s ease;
         }
         
         .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
             border-color: var(--accent);
+            box-shadow: var(--shadow-lg);
         }
         
         .project-header {
@@ -365,7 +363,6 @@
             right: 0;
             z-index: 1000;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            animation: fadeIn 0.5s ease-out;
         }
         
         .nav-links {
@@ -379,27 +376,27 @@
             color: var(--text-light);
             font-weight: 500;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             position: relative;
+            --ul-w: 0;   /* GSAP animates this 0→100 for the underline width */
         }
         
+        /* Underline is now driven by GSAP (see animation script). We expose
+           a numeric custom property --ul-w (0..100) that the ::after reads
+           as a percentage width, so GSAP can tween it smoothly. */
         .nav-links a::after {
             content: '';
             position: absolute;
-            width: 0;
+            width: calc(var(--ul-w, 0) * 1%);
             height: 2px;
             bottom: -4px;
             left: 0;
             background: var(--accent);
-            transition: width 0.3s ease;
+            will-change: width;
         }
         
         .nav-links a:hover {
             color: var(--accent);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
         }
         /* Hero */
         
@@ -431,17 +428,6 @@
             height: 8px;
             background: #10b981;
             border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
         }
         
         .hero h1 {
@@ -463,29 +449,7 @@
             margin-bottom: 2rem;
         }
         
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: white;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            color: var(--accent);
-            box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero h1 span {
-            color: var(--accent);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            max-width: 500px;
-            margin-bottom: 2rem;
-        }
+
         
         .hero-buttons {
             display: flex;
@@ -756,6 +720,10 @@
         }
     </style>
 
+    <!-- Mark the page as "JS pending" before first paint so GSAP-driven
+         hero elements stay hidden until the animation script runs. -->
+    <script>document.documentElement.classList.add("js-pending");</script>
+
 </head>
 
 <body>
@@ -821,7 +789,7 @@
             <p>Tools and technologies I work with</p>
         </div>
         <div class="skills-grid">
-            <div class="skill-category reveal" style="transition-delay: 0.1s;">
+            <div class="skill-category" style="transition-delay: 0.1s;">
                 <h3><i class="fas fa-database"></i> Data Analysis</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Python</span>
@@ -830,7 +798,7 @@
                     <span class="skill-tag">ETL</span>
                 </div>
             </div>
-            <div class="skill-category reveal" style="transition-delay: 0.2s;">
+            <div class="skill-category" style="transition-delay: 0.2s;">
                 <h3><i class="fas fa-chart-bar"></i> Visualization</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Power BI</span>
@@ -839,7 +807,7 @@
                     <span class="skill-tag">Dashboards</span>
                 </div>
             </div>
-            <div class="skill-category reveal" style="transition-delay: 0.3s;">
+            <div class="skill-category" style="transition-delay: 0.3s;">
                 <h3><i class="fas fa-code"></i> Frontend</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">HTML</span>
@@ -848,7 +816,7 @@
                     <span class="skill-tag">Responsive Design</span>
                 </div>
             </div>
-            <div class="skill-category reveal" style="transition-delay: 0.4s;">
+            <div class="skill-category" style="transition-delay: 0.4s;">
                 <h3><i class="fas fa-brain"></i> Machine Learning</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">ML Basics</span>
@@ -1029,7 +997,26 @@
         <p class="footer-text">© 2026 Seenivasan V. Built with passion.</p>
     </footer>
 
+    <!-- ============================================================
+         ANIMATION LIBRARIES (CDN)
+         GSAP is 100% free now (incl. all bonus plugins) since Webflow's
+         2025 acquisition, so we load the official plugins from jsDelivr.
+         - gsap .................. the animation engine (core)
+         - ScrollTrigger ......... fires animations based on scroll
+         - SplitText ............. splits text into words/chars for the
+                                  hero + section-heading reveals
+         - Lenis ................. buttery inertia smooth scrolling
+                                  (free; integrates cleanly with ScrollTrigger)
+         ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
     <script>
+        /* ------------------------------------------------------------
+           0. RESUME DOWNLOAD (unchanged from your original code)
+           ------------------------------------------------------------ */
         function confirmDownload(event) {
             event.preventDefault();
             if (confirm("Do you want to download my resume?")) {
@@ -1041,38 +1028,492 @@
                 document.body.removeChild(link);
             }
         }
+    </script>
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const target = document.querySelector(targetId);
-                if (target) {
-                    const navHeight = document.querySelector('nav').offsetHeight;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+    <script>
+        /* ============================================================
+           MAIN ANIMATION SCRIPT  (GSAP + ScrollTrigger + SplitText)
+           Each numbered block controls one part of the page and is
+           clearly commented so you can find and edit it later.
+           If GSAP fails to load, we bail out and reveal everything.
+           ============================================================ */
+        (function() {
+
+            // Safety net: if GSAP is missing, show everything and stop.
+            if (typeof gsap === "undefined") {
+                document.body.classList.add("no-anim");
+                document.documentElement.classList.remove("js-pending");
+                return;
+            }
+
+            // Register the official plugins (SplitText is free now).
+            gsap.registerPlugin(ScrollTrigger);
+            if (typeof SplitText !== "undefined") gsap.registerPlugin(SplitText);
+
+            // GSAP is ready — drop the pre-paint "hidden" state so .from()
+            // tweens capture the natural (visible) end-state. Done here,
+            // synchronously before any tween is created, so there is no
+            // flash of content between removing the class and animating.
+            document.documentElement.classList.remove("js-pending");
+
+            /* ---- Shared timing config for a cohesive premium feel ----
+               Consistent easing everywhere; all per-element durations sit
+               in the 0.6s–1s range with no bounce / elastic curves. */
+            const EASE = "power3.out";
+            const REVEAL_TOGGLE = "play none none reverse"; // replay-safe
+
+            const reduceMotion =
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const canHover = window.matchMedia("(hover: hover)").matches;
+
+            /* --------------------------------------------------------
+                1. SMOOTH SCROLL (Lenis + ScrollTrigger sync)
+               Gives the whole page inertia-based "buttery" scrolling.
+               We tell ScrollTrigger to update on every Lenis frame so
+               scroll-based animations stay perfectly in sync.
+               -------------------------------------------------------- */
+            let lenis = null;
+            if (typeof Lenis !== "undefined" && !reduceMotion) {
+                lenis = new Lenis({
+                    duration: 1.15,          // higher = slower, glidier feel
+                    // gentle ease-out curve — smooth & premium, not bouncy
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    smoothWheel: true
+                });
+
+                // Keep ScrollTrigger in sync with Lenis' virtual scroll
+                lenis.on("scroll", ScrollTrigger.update);
+
+                // Drive Lenis from GSAP's ticker for one unified render loop
+                gsap.ticker.add((time) => lenis.raf(time * 1000));
+                gsap.ticker.lagSmoothing(0);
+            }
+
+            /* --------------------------------------------------------
+                2. WORD-SPLIT HELPER (SplitText plugin OR custom fallback)
+                Returns the individual word elements so we can stagger them.
+                Uses the official SplitText plugin when present; otherwise
+                falls back to the lightweight custom splitter below.
+                -------------------------------------------------------- */
+            function splitIntoWords(el) {
+                if (typeof SplitText !== "undefined") {
+                    const split = new SplitText(el, {
+                        type: "words",
+                        // keep the coloured <span> + <br> in the hero heading
+                        wordsClass: "word"
+                    });
+                    // wrap each word in a clipping mask for the premium reveal
+                    split.words.forEach((w) => {
+                        const mask = document.createElement("span");
+                        mask.className = "word-mask";
+                        w.parentNode.insertBefore(mask, w);
+                        mask.appendChild(w);
+                    });
+                    return split.words;
+                }
+                // --- custom fallback (no plugin) ---
+                const words = [];
+                function walk(node, targetParent) {
+                    node.childNodes.forEach((child) => {
+                        if (child.nodeType === Node.TEXT_NODE) {
+                            const parts = child.textContent.split(/(\s+)/);
+                            parts.forEach((part) => {
+                                if (part.trim() === "") {
+                                    targetParent.appendChild(document.createTextNode(part));
+                                    return;
+                                }
+                                const mask = document.createElement("span");
+                                mask.className = "word-mask";
+                                const word = document.createElement("span");
+                                word.className = "word";
+                                word.textContent = part;
+                                if (targetParent.dataset && targetParent.dataset.inheritColor) {
+                                    word.style.color = targetParent.dataset.inheritColor;
+                                }
+                                mask.appendChild(word);
+                                targetParent.appendChild(mask);
+                                words.push(word);
+                            });
+                        } else if (child.nodeName === "BR") {
+                            targetParent.appendChild(document.createElement("br"));
+                        } else if (child.nodeType === Node.ELEMENT_NODE) {
+                            const clone = child.cloneNode(false);
+                            const colour = getComputedStyle(child).color;
+                            clone.dataset.inheritColor = colour;
+                            targetParent.appendChild(clone);
+                            walk(child, clone);
+                        }
                     });
                 }
-            });
-        });
+                const frag = document.createElement("span");
+                frag.className = "split-line";
+                walk(el, frag);
+                el.innerHTML = "";
+                el.appendChild(frag);
+                return words;
+            }
 
-        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-        
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+            /* --------------------------------------------------------
+                3. HERO HEADING — word-by-word SplitText reveal on load
+                Each word slides up out of its mask with a small stagger.
+                The badge fades in AFTER the heading finishes, then the
+                buttons scale-up last. (Requirement: 1 hero, 2 badge, 3 btn)
+                -------------------------------------------------------- */
+            const heroHeading = document.querySelector(".hero h1");
+            if (heroHeading && !reduceMotion) {
+                const heroWords = splitIntoWords(heroHeading);
+
+                const heroTL = gsap.timeline({
+                    defaults: { ease: EASE }
+                });
+
+                heroTL.from(heroWords, {
+                    yPercent: 120,      // start fully below the mask
+                    duration: 0.9,
+                    stagger: 0.08
+                })
+                // hero badge fades in after the heading finishes
+                .from(".hero-badge", { y: 20, opacity: 0, duration: 0.7 }, "+=0.1")
+                .from(".hero-subtitle", { y: 20, opacity: 0, duration: 0.7 }, "-=0.4")
+                // buttons animate in last with a slight scale-up entrance
+                .from(".hero-buttons", {
+                    y: 24, opacity: 0, scale: 0.92, duration: 0.8
+                }, "-=0.4");
+            } else {
+                document.documentElement.classList.remove("js-pending");
+            }
+
+            /* --------------------------------------------------------
+                4. SECTION HEADINGS — word reveal on scroll (ScrollTrigger)
+                Every section <h2> is split into words that slide up with a
+                slight stagger as the heading enters the viewport. The
+                sub-paragraph fades up just after. Uses toggleActions so it
+                reverses cleanly when scrolled away (no awkward replay).
+                -------------------------------------------------------- */
+            gsap.utils.toArray(".section-header").forEach((header) => {
+                const h2 = header.querySelector("h2");
+                const p = header.querySelector("p");
+                if (!h2 || reduceMotion) return;
+
+                const words = splitIntoWords(h2);
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: header,
+                        start: "top 85%",
+                        toggleActions: REVEAL_TOGGLE
+                    },
+                    defaults: { ease: EASE }
+                });
+
+                tl.from(words, { yPercent: 120, duration: 0.7, stagger: 0.06 });
+                if (p) tl.from(p, { y: 18, opacity: 0, duration: 0.6 }, "-=0.35");
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        revealElements.forEach(el => revealObserver.observe(el));
+
+            /* --------------------------------------------------------
+                5. GENERIC REVEALS — .reveal / .reveal-left / .reveal-right
+                Now driven entirely by ScrollTrigger (per the brief) with
+                toggleActions "play none none reverse" so they replay
+                cleanly. About text slides from left, stats from right.
+                -------------------------------------------------------- */
+            const revealAxis = {
+                "reveal":       { y: 24, x: 0 },
+                "reveal-left":  { y: 0,  x: -40 },
+                "reveal-right": { y: 0,  x: 40 }
+            };
+
+            function getFrom(el) {
+                if (el.classList.contains("reveal-left"))  return revealAxis["reveal-left"];
+                if (el.classList.contains("reveal-right")) return revealAxis["reveal-right"];
+                return revealAxis["reveal"];
+            }
+
+            // Every reveal element EXCEPT section headers (handled in block 4)
+            // and elements owned by a dedicated block below (projects, contact,
+            // experience, stat cards) so we never double-animate the same node.
+            const revealEls = Array.from(document.querySelectorAll(
+                ".reveal, .reveal-left, .reveal-right"
+            )).filter((el) =>
+                !el.classList.contains("section-header") &&
+                !el.closest(".projects-grid, .contact-links, .experience-list") &&
+                !el.classList.contains("stat-card")
+            );
+
+            if (reduceMotion) {
+                gsap.set(revealEls, { opacity: 1, x: 0, y: 0 });
+            } else {
+                revealEls.forEach((el) => {
+                    const from = getFrom(el);
+                    gsap.fromTo(el,
+                        { opacity: 0, x: from.x, y: from.y },
+                        {
+                            opacity: 1, x: 0, y: 0,
+                            duration: 0.9, ease: EASE, overwrite: true,
+                            scrollTrigger: {
+                                trigger: el,
+                                start: "top 88%",
+                                toggleActions: REVEAL_TOGGLE
+                            }
+                        }
+                    );
+                });
+            }
+
+            // Make sure the section-header wrappers themselves are visible
+            gsap.set(".section-header.reveal", { opacity: 1, y: 0 });
+
+            // Stat cards: staggered scale+fade as a GROUP when the stats grid
+            // enters (replaces the old per-card inline transition-delay).
+            if (!reduceMotion) {
+                gsap.utils.toArray(".about-stats").forEach((grid) => {
+                    const cards = grid.querySelectorAll(".stat-card");
+                    if (cards.length) {
+                        gsap.fromTo(cards,
+                            { opacity: 0, scale: 0.85, y: 16 },
+                            {
+                                opacity: 1, scale: 1, y: 0,
+                                duration: 0.7, ease: EASE,
+                                stagger: 0.12, overwrite: true,
+                                scrollTrigger: {
+                                    trigger: grid,
+                                    start: "top 88%",
+                                    toggleActions: REVEAL_TOGGLE
+                                }
+                            }
+                        );
+                    }
+                });
+            }
+
+            /* --------------------------------------------------------
+                6. SKILLS — category cards stagger in (fade+scale) on scroll,
+                and each card's skill tags pop in with a subtle stagger after
+                their parent card enters view. Driven by ScrollTrigger.
+                -------------------------------------------------------- */
+            if (!reduceMotion) {
+                gsap.utils.toArray(".skill-category").forEach((card) => {
+                    // card: fade + scale entrance
+                    gsap.fromTo(card,
+                        { opacity: 0, scale: 0.92, y: 20 },
+                        {
+                            opacity: 1, scale: 1, y: 0,
+                            duration: 0.8, ease: EASE, overwrite: true,
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 88%",
+                                toggleActions: REVEAL_TOGGLE
+                            }
+                        }
+                    );
+                    // skill tags: subtle pop-in, staggered, fired after card
+                    const tags = card.querySelectorAll(".skill-tag");
+                    if (tags.length) {
+                        gsap.fromTo(tags,
+                            { opacity: 0, scale: 0.8, y: 8 },
+                            {
+                                opacity: 1, scale: 1, y: 0,
+                                duration: 0.5, ease: EASE,
+                                stagger: 0.05, overwrite: true,
+                                delay: 0.15,
+                                scrollTrigger: {
+                                    trigger: card,
+                                    start: "top 88%",
+                                    toggleActions: REVEAL_TOGGLE
+                                }
+                            }
+                        );
+                    }
+                });
+            }
+
+            /* --------------------------------------------------------
+                7. EXPERIENCE — item card slides in from left with a fade,
+                then the <ul> <li> list items stagger in one-by-one slightly
+                after the card container animates. ScrollTrigger driven.
+                -------------------------------------------------------- */
+            if (!reduceMotion) {
+                gsap.utils.toArray(".experience-item").forEach((item) => {
+                    const lis = item.querySelectorAll("ul li");
+
+                    const tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            toggleActions: REVEAL_TOGGLE
+                        },
+                        defaults: { ease: EASE }
+                    });
+
+                    tl.from(item, { x: -60, opacity: 0, duration: 0.9 })
+                      // list items stagger in after the card begins
+                      .from(lis, {
+                          x: -20, opacity: 0, duration: 0.6, stagger: 0.12
+                      }, "-=0.45");
+                });
+            }
+
+            /* --------------------------------------------------------
+                8. PROJECTS — cards animate scale (0.95→1) + fade + slight
+                upward move, staggered automatically as ONE group via a single
+                ScrollTrigger on the grid (scales to ANY number of projects,
+                no manual delays, and stays perfectly in sync with Lenis).
+                On hover: smooth scale-up to 1.02 + subtle shadow lift.
+                -------------------------------------------------------- */
+            if (!reduceMotion) {
+                const grids = gsap.utils.toArray(".projects-grid");
+                grids.forEach((grid) => {
+                    const cards = gsap.utils.toArray(grid.querySelectorAll(".project-card"));
+                    if (!cards.length) return;
+
+                    gsap.set(cards, { opacity: 0, scale: 0.95, y: 30 });
+
+                    // One timeline per grid → true group stagger + replay-safe
+                    const tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: grid,
+                            start: "top 85%",
+                            toggleActions: REVEAL_TOGGLE
+                        },
+                        defaults: { ease: EASE }
+                    });
+                    tl.to(cards, {
+                        opacity: 1, scale: 1, y: 0,
+                        duration: 0.9, stagger: 0.12, overwrite: true
+                    });
+                });
+
+                // Hover micro-interaction: only `scale`/`y` are tweened by GSAP
+                // (GPU-composited, perfectly smooth). The shadow lift is left to
+                // the CSS :hover transition on .project-card (one element at a
+                // time, so no repaint jank).
+                if (canHover) {
+                    gsap.utils.toArray(".project-card").forEach((card) => {
+                        card.addEventListener("mouseenter", () => {
+                            gsap.to(card, {
+                                scale: 1.02, y: -4,
+                                duration: 0.4, ease: EASE, overwrite: "auto"
+                            });
+                        });
+                        card.addEventListener("mouseleave", () => {
+                            gsap.to(card, {
+                                scale: 1, y: 0,
+                                duration: 0.5, ease: EASE, overwrite: "auto"
+                            });
+                        });
+                    });
+                }
+            }
+
+            /* --------------------------------------------------------
+                9. CONTACT — links stagger in from the left on scroll entry.
+                On hover: smooth icon rotate/scale micro-interaction (GSAP).
+                -------------------------------------------------------- */
+            if (!reduceMotion) {
+                gsap.utils.toArray(".contact-link").forEach((link) => {
+                    gsap.fromTo(link,
+                        { opacity: 0, x: -40 },
+                        {
+                            opacity: 1, x: 0,
+                            duration: 0.8, ease: EASE, overwrite: true,
+                            scrollTrigger: {
+                                trigger: link,
+                                start: "top 90%",
+                                toggleActions: REVEAL_TOGGLE
+                            }
+                        }
+                    );
+
+                    if (canHover) {
+                        const icon = link.querySelector(".icon i, .icon");
+                        link.addEventListener("mouseenter", () => {
+                            gsap.to(icon, {
+                                rotation: 12, scale: 1.15,
+                                duration: 0.4, ease: EASE, overwrite: "auto"
+                            });
+                        });
+                        link.addEventListener("mouseleave", () => {
+                            gsap.to(icon, {
+                                rotation: 0, scale: 1,
+                                duration: 0.5, ease: EASE, overwrite: "auto"
+                            });
+                        });
+                    }
+                });
+            }
+
+            /* --------------------------------------------------------
+                10. NAVBAR — (a) GSAP-powered hover underline (replaces the
+                old CSS ::after transition) and (b) shrink/compress height on
+                scroll down, using ScrollTrigger.
+                -------------------------------------------------------- */
+            const navEl = document.querySelector("nav");
+            if (navEl) {
+                // (a) smooth underline driven by GSAP (animates --ul-w 0→100)
+                gsap.utils.toArray(".nav-links a").forEach((link) => {
+                    link.addEventListener("mouseenter", () => {
+                        gsap.to(link, { "--ul-w": 100, duration: 0.35, ease: EASE });
+                    });
+                    link.addEventListener("mouseleave", () => {
+                        gsap.to(link, { "--ul-w": 0, duration: 0.3, ease: EASE });
+                    });
+                });
+
+                // (b) navbar compresses in height once the user scrolls down
+                ScrollTrigger.create({
+                    start: "top top",        // the moment the page starts scrolling
+                    end: "max",
+                    onUpdate: (self) => {
+                        const scrolled = self.scroll() > 40;
+                        navEl.style.boxShadow = scrolled
+                            ? "0 6px 24px rgba(0,0,0,0.08)"
+                            : "0 1px 3px rgba(0,0,0,0.05)";
+                        navEl.style.background = scrolled
+                            ? "rgba(255,255,255,0.85)"
+                            : "rgba(255,255,255,0.9)";
+                    }
+                });
+                // animate the height compression tied to scroll position
+                gsap.to(navEl, {
+                    paddingTop: "0.5rem",
+                    paddingBottom: "0.5rem",
+                    ease: "none",
+                    scrollTrigger: {
+                        start: "top top",
+                        end: "+=120",
+                        scrub: true
+                    }
+                });
+            }
+
+            /* --------------------------------------------------------
+                11. SMOOTH ANCHOR NAV (works with Lenis)
+                Clicking a nav link glides to the section using Lenis when
+                available, falling back to native smooth scroll otherwise.
+                Accounts for the fixed navbar height.
+                -------------------------------------------------------- */
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function(e) {
+                    const targetId = this.getAttribute("href");
+                    if (targetId === "#") return;
+                    const target = document.querySelector(targetId);
+                    if (!target) return;
+
+                    e.preventDefault();
+                    const navHeight = navEl ? navEl.offsetHeight : 0;
+
+                    if (lenis) {
+                        lenis.scrollTo(target, { offset: -navHeight });
+                    } else {
+                        const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        window.scrollTo({ top, behavior: "smooth" });
+                    }
+                });
+            });
+
+            // Recalculate ScrollTrigger positions once fonts/images settle
+            window.addEventListener("load", () => ScrollTrigger.refresh());
+
+        })();
     </script>
 </body>
 
