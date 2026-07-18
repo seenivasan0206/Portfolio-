@@ -95,6 +95,39 @@
             }
         }
         
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
         .hero {
             animation: fadeInUp 1s ease-out;
         }
@@ -116,7 +149,6 @@
         }
         
         section {
-            animation: fadeInUp 0.8s ease-out both;
             max-width: 1100px;
             margin: 2rem auto;
             padding: 4rem 2rem;
@@ -166,29 +198,12 @@
             padding: 1.5rem;
             border-radius: 12px;
             text-align: center;
-            animation: fadeInUp 0.5s ease-out both;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .stat-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
-        }
-        
-        .stat-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        
-        .stat-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .stat-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-        
-        .stat-card:nth-child(4) {
-            animation-delay: 0.4s;
         }
         
         .stat-number {
@@ -215,28 +230,11 @@
             border-radius: 12px;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 0.6s ease-out both;
         }
         
         .skill-category:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
-        }
-        
-        .skill-category:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        
-        .skill-category:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .skill-category:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-        
-        .skill-category:nth-child(4) {
-            animation-delay: 0.4s;
         }
         
         .skill-category h3 {
@@ -285,24 +283,6 @@
             border-radius: 12px;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
-            animation: fadeInUp 0.6s ease-out both;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .project-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        
-        .project-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .project-card:nth-child(3) {
-            animation-delay: 0.3s;
         }
         
         .project-card:hover {
@@ -585,32 +565,11 @@
             color: var(--text);
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
-            animation: fadeInUp 0.5s ease-out both;
         }
         
         .contact-link:hover {
             transform: translateY(-3px) translateX(4px);
             box-shadow: var(--shadow-lg);
-        }
-        
-        .contact-link:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        
-        .contact-link:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .contact-link:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-        
-        .contact-link:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-        
-        .contact-link:nth-child(5) {
-            animation-delay: 0.5s;
         }
         
         .contact-link .icon {
@@ -826,30 +785,30 @@
         </div>
     </div>
     <section id="about">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>About Me</h2>
             <p>Passionate about turning data into decisions</p>
         </div>
         <div class="about-content">
-            <div class="about-text">
+            <div class="about-text reveal-left">
                 <p>I'm an aspiring Data Analyst with a keen eye for patterns and insights hidden within datasets. My journey combines technical skills in data analysis with frontend development capabilities to create impactful data-driven solutions.</p>
                 <p>I specialize in Python, SQL, and data visualization tools like Power BI to help businesses make informed decisions. Additionally, my frontend skills allow me to present data effectively through interactive web interfaces.</p>
                 <p>I'm eager to contribute to projects that leverage data to solve real-world problems and drive meaningful impact.</p>
             </div>
-            <div class="about-stats">
-                <div class="stat-card">
+            <div class="about-stats reveal-right">
+                <div class="stat-card reveal" style="transition-delay: 0.1s;">
                     <div class="stat-number">3+</div>
                     <div class="stat-label">Projects Completed</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card reveal" style="transition-delay: 0.2s;">
                     <div class="stat-number">2+</div>
                     <div class="stat-label">Years Learning</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card reveal" style="transition-delay: 0.3s;">
                     <div class="stat-number">Data</div>
                     <div class="stat-label">Focus Area</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card reveal" style="transition-delay: 0.4s;">
                     <div class="stat-number">Web</div>
                     <div class="stat-label">Development</div>
                 </div>
@@ -857,12 +816,12 @@
         </div>
     </section>
     <section id="skills">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Skills</h2>
             <p>Tools and technologies I work with</p>
         </div>
         <div class="skills-grid">
-            <div class="skill-category">
+            <div class="skill-category reveal" style="transition-delay: 0.1s;">
                 <h3><i class="fas fa-database"></i> Data Analysis</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Python</span>
@@ -871,7 +830,7 @@
                     <span class="skill-tag">ETL</span>
                 </div>
             </div>
-            <div class="skill-category">
+            <div class="skill-category reveal" style="transition-delay: 0.2s;">
                 <h3><i class="fas fa-chart-bar"></i> Visualization</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Power BI</span>
@@ -880,7 +839,7 @@
                     <span class="skill-tag">Dashboards</span>
                 </div>
             </div>
-            <div class="skill-category">
+            <div class="skill-category reveal" style="transition-delay: 0.3s;">
                 <h3><i class="fas fa-code"></i> Frontend</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">HTML</span>
@@ -889,7 +848,7 @@
                     <span class="skill-tag">Responsive Design</span>
                 </div>
             </div>
-            <div class="skill-category">
+            <div class="skill-category reveal" style="transition-delay: 0.4s;">
                 <h3><i class="fas fa-brain"></i> Machine Learning</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">ML Basics</span>
@@ -900,12 +859,12 @@
         </div>
     </section>
     <section id="experience">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Work Experience & Training</h2>
             <p>Building skills through hands-on training and real-world projects</p>
         </div>
         <div class="experience-list">
-            <div class="experience-item">
+            <div class="experience-item reveal" style="transition-delay: 0.1s;">
                 <div class="experience-header">
                     <div>
                         <div class="experience-role">Data Analyst Trainee</div>
@@ -929,12 +888,12 @@
         </div>
     </section>
     <section id="projects">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Projects</h2>
             <p>Some of the work I've done</p>
         </div>
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card reveal" style="transition-delay: 0.1s;">
                 <div class="project-header">
                     <div class="project-icon"><i class="fas fa-droplet"></i></div>
                     <div class="project-links">
@@ -950,7 +909,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card reveal" style="transition-delay: 0.2s;">
                 <div class="project-header">
                     <div class="project-icon"><i class="fas fa-traffic-light"></i></div>
                     <div class="project-links">
@@ -966,7 +925,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card reveal" style="transition-delay: 0.3s;">
                 <div class="project-header">
                     <div class="project-icon"><i class="fas fa-briefcase"></i></div>
                     <div class="project-links">
@@ -982,7 +941,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card reveal" style="transition-delay: 0.4s;">
                 <div class="project-header">
                     <div class="project-icon"><i class="fas fa-chart-line"></i></div>
                     <div class="project-links">
@@ -998,7 +957,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card reveal" style="transition-delay: 0.5s;">
                 <div class="project-header">
                     <div class="project-icon"><i class="fas fa-university"></i></div>
                     <div class="project-links">
@@ -1016,41 +975,41 @@
         </div>
     </section>
     <section id="contact">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Get in Touch</h2>
             <p>Let's Connect</p>
         </div>
         <div class="contact-content" style="display: block;">
             <div class="contact-links" style="flex-direction: column; max-width: 500px; margin: 0 auto;">
-                <a href="tel:+919344257610" class="contact-link">
+                <a href="tel:+919344257610" class="contact-link reveal" style="transition-delay: 0.1s;">
                     <div class="icon"><i class="fas fa-phone"></i></div>
                     <div class="text">
                         <span>Call Me</span>
                         <strong>+91 9344257610</strong>
                     </div>
                 </a>
-                <a href="mailto:seeni3188@gmail.com" class="contact-link">
+                <a href="mailto:seeni3188@gmail.com" class="contact-link reveal" style="transition-delay: 0.2s;">
                     <div class="icon"><i class="fas fa-envelope"></i></div>
                     <div class="text">
                         <span>Email</span>
                         <strong>seeni3188@gmail.com</strong>
                     </div>
                 </a>
-                <a href="https://www.linkedin.com/in/seenivasan0206" target="_blank" class="contact-link">
+                <a href="https://www.linkedin.com/in/seenivasan0206" target="_blank" class="contact-link reveal" style="transition-delay: 0.3s;">
                     <div class="icon"><i class="fab fa-linkedin"></i></div>
                     <div class="text">
                         <span>LinkedIn</span>
                         <strong>seenivasan-v</strong>
                     </div>
                 </a>
-                <a href="https://github.com/seenivasan0206" target="_blank" class="contact-link">
+                <a href="https://github.com/seenivasan0206" target="_blank" class="contact-link reveal" style="transition-delay: 0.4s;">
                     <div class="icon"><i class="fab fa-github"></i></div>
                     <div class="text">
                         <span>GitHub</span>
                         <strong>seenivasan0206</strong>
                     </div>
                 </a>
-                <a href="#" class="contact-link" onclick="confirmDownload(event)">
+                <a href="#" class="contact-link reveal" style="transition-delay: 0.5s;" onclick="confirmDownload(event)">
                     <div class="icon"><i class="fas fa-file-download"></i></div>
                     <div class="text">
                         <span>Download</span>
@@ -1082,6 +1041,38 @@
                 document.body.removeChild(link);
             }
         }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 
