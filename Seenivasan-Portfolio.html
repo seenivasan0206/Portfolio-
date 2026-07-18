@@ -617,6 +617,30 @@
             margin: 0 auto;
             text-align: left;
         }
+
+        /* MOBILE FIX: keep the Experience list perfectly centered. The list is
+           centered with `margin: 0 auto`; any horizontal offset (entrance
+           animation, leftover transform, or a transient horizontal scrollbar)
+           would shift it off-center. We clip overflow, pin width to 100%, and
+           disable transforms so the block is always centered on mobile. */
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+            }
+            .experience-list {
+                margin: 0 auto;
+                overflow-x: clip;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            .experience-item {
+                overflow-x: clip;
+                transform: none !important;   /* no leftover GSAP transform */
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
         
         .experience-item {
             padding: 1.5rem;
@@ -832,7 +856,7 @@
             <p>Building skills through hands-on training and real-world projects</p>
         </div>
         <div class="experience-list">
-            <div class="experience-item reveal" style="transition-delay: 0.1s;">
+            <div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-role">Data Analyst Trainee</div>
@@ -1332,6 +1356,12 @@
                 after the card container animates. ScrollTrigger driven.
                 -------------------------------------------------------- */
             if (!reduceMotion) {
+                // NOTE: the experience entrance is now purely a vertical
+                // fade+rise. We deliberately avoid any horizontal (x) translate
+                // because the list is centered with `margin: 0 auto`; a left
+                // slide-in shifts the whole block off-center on mobile. We also
+                // use clearProps so no residual transform is left behind, which
+                // would otherwise keep the card nudged away from center.
                 gsap.utils.toArray(".experience-item").forEach((item) => {
                     const lis = item.querySelectorAll("ul li");
 
@@ -1344,10 +1374,14 @@
                         defaults: { ease: EASE }
                     });
 
-                    tl.from(item, { x: -60, opacity: 0, duration: 0.9 })
+                    tl.from(item, {
+                            y: 40, opacity: 0, duration: 0.9,
+                            clearProps: "transform"
+                        })
                       // list items stagger in after the card begins
                       .from(lis, {
-                          x: -20, opacity: 0, duration: 0.6, stagger: 0.12
+                          y: 16, opacity: 0, duration: 0.6, stagger: 0.12,
+                          clearProps: "transform"
                       }, "-=0.45");
                 });
             }
@@ -1510,8 +1544,43 @@
                 });
             });
 
-            // Recalculate ScrollTrigger positions once fonts/images settle
-            window.addEventListener("load", () => ScrollTrigger.refresh());
+            // Recalculate ScrollTrigger positions once EVERYTHING that affects
+            // layout has loaded. On mobile the Experience/Project section is
+            // centered via `margin: 0 auto`; if ScrollTrigger measures its
+            // position before fonts + the Font Awesome icon font + images are
+            // painted, the cached start position is wrong and the entrance
+            // animation leaves the block off-center. Refreshing after each
+            // asset settles keeps the centered measurement correct.
+            function refreshScrollTriggers() {
+                ScrollTrigger.refresh();
+            }
+
+            // (a) Webfonts (Inter) ready
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(refreshScrollTriggers);
+            }
+            // (b) Font Awesome icon font (loaded via all.min.css @font-face)
+            if (document.fonts && document.fonts.load) {
+                Promise.all([
+                    document.fonts.load('1em "Font Awesome 6 Free"').catch(() => {}),
+                    document.fonts.load('1em "Font Awesome 6 Free Solid"').catch(() => {}),
+                    document.fonts.load('1em "Font Awesome 6 Brands"').catch(() => {})
+                ]).then(refreshScrollTriggers);
+            }
+            // (c) All images decoded (affects section heights on mobile)
+            Promise.all(
+                Array.from(document.images).map((img) =>
+                    (img.complete && img.naturalWidth > 0)
+                        ? Promise.resolve()
+                        : new Promise((res) => { img.onload = img.onerror = res; })
+                )
+            ).then(refreshScrollTriggers);
+            // (d) Final safety net — fires after the whole page loads
+            window.addEventListener("load", refreshScrollTriggers);
+            // (e) Re-measure after a mobile orientation change
+            window.addEventListener("orientationchange", () =>
+                setTimeout(refreshScrollTriggers, 200)
+            );
 
         })();
     </script>
