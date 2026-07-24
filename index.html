@@ -1,11 +1,346 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="refresh" content="0; url=Seenivasan-Portfolio.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seenivasan V | Data Analyst</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <div class="scroll-progress"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">SV<span>.</span></a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span> Available for work
+        </div>
+        <h1>Seenivasan V<br><span>Data Analyst</span></h1>
+        <div class="hero-chart">
+            <svg viewBox="0 0 280 120" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <polyline class="chart-line" points="0,90 40,70 80,80 120,45 160,55 200,25 240,35 280,10" />
+                <circle class="chart-dot" cx="280" cy="10" r="4" fill="#14b8a6" />
+            </svg>
+        </div>
+        <p class="hero-subtitle">Transforming complex data into meaningful insights through analysis and compelling visualizations.</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">
+                <i class="fas fa-folder"></i> View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline">
+                <i class="fas fa-envelope"></i> Get in Touch
+            </a>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="section-header reveal">
+            <h2>About Me</h2>
+            <p>Passionate about turning data into decisions</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text reveal-left">
+                <p>I'm an aspiring Data Analyst with a keen eye for patterns and insights hidden within datasets. My journey combines technical skills in data analysis with frontend development capabilities to create impactful data-driven solutions.</p>
+                <p>I specialize in <strong>Python, SQL</strong>, and data visualization tools like <strong>Power BI</strong> to help businesses make informed decisions. Additionally, my frontend skills allow me to present data effectively through interactive web interfaces.</p>
+                <p>I'm eager to contribute to projects that leverage data to solve real-world problems and drive meaningful impact.</p>
+            </div>
+            <div class="about-stats reveal-right">
+                <div class="stat-card">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2+</div>
+                    <div class="stat-label">Years Learning</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Data</div>
+                    <div class="stat-label">Focus Area</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Web</div>
+                    <div class="stat-label">Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-header reveal">
+            <h2>Skills</h2>
+            <p>Tools and technologies I work with</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3><i class="fas fa-database"></i> Data Analysis</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Data Cleaning</span>
+                    <span class="skill-tag">ETL</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-bar"></i> Visualization</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Excel</span>
+                    <span class="skill-tag">Charts</span>
+                    <span class="skill-tag">Dashboards</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Frontend</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Responsive Design</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-brain"></i> Machine Learning</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">ML Basics</span>
+                    <span class="skill-tag">Model Training</span>
+                    <span class="skill-tag">Image Processing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-header reveal">
+            <h2>Work Experience & Training</h2>
+            <p>Building skills through hands-on training and real-world projects</p>
+        </div>
+        <div class="experience-list">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-role">Data Analyst Trainee</div>
+                        <div class="experience-company">C Cube Technologies</div>
+                        <div class="experience-duration">Jan 2026 – Present</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Completed intensive training covering Excel, SQL, Python, and Power BI for end-to-end data analysis and visualization.</li>
+                    <li>Built a <a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank">Banking Loan Approval & Credit Risk Analytics Dashboard</a> analyzing approval trends, customer demographics, and lending patterns.</li>
+                    <li>Developed a <a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank">Mobile & Laptop Sales Dashboard</a> to track KPIs, visualize product performance, and identify sales trends across categories and regions.</li>
+                    <li>Applied data cleaning and ETL techniques to transform raw datasets into structured, actionable insights for business decision-making.</li>
+                    <li>Designed interactive dashboards with KPI cards, slicers, and pivot charts to communicate analytical findings effectively to stakeholders.</li>
+                </ul>
+                <div class="experience-summary">
+                    Currently training as a Data Analyst Trainee at C Cube Technologies (Jan 2026 – Present), focusing on Excel, SQL, Python, and Power BI. Completed two hands-on dashboards analyzing loan approval risk and mobile/laptop sales performance.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-header reveal">
+            <h2>Projects</h2>
+            <p>Some of the work I've done</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon"><i class="fas fa-droplet"></i></div>
+                    <div class="project-links">
+                        <a href="https://github.com/seenivasan0206/blood-group-fingerprint" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <h3><a href="https://github.com/seenivasan0206/blood-group-fingerprint" target="_blank">Blood Group Detection</a></h3>
+                <p>Machine learning model that predicts blood group from fingerprint images using advanced image processing techniques.</p>
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>ML</span>
+                    <span>Image Processing</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon"><i class="fas fa-traffic-light"></i></div>
+                    <div class="project-links">
+                        <a href="https://github.com/seenivasan0206/IOT-Traffic-System" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <h3><a href="https://github.com/seenivasan0206/IOT-Traffic-System" target="_blank">IoT Traffic System</a></h3>
+                <p>Smart traffic management system that optimizes signal timing based on real-time traffic density measurement.</p>
+                <div class="project-tech">
+                    <span>IoT</span>
+                    <span>Sensor</span>
+                    <span>Real-time</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="project-links">
+                        <a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <h3><a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank">Job Portal</a></h3>
+                <p>Full-featured web application for job seekers with advanced filtering, search, and application tracking.</p>
+                <div class="project-tech">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="project-links">
+                        <a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <h3><a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank">Mobile & Laptop Sales Dashboard</a></h3>
+                <p>Interactive Excel dashboard for analyzing mobile and laptop sales data with key performance metrics and visualizations.</p>
+                <div class="project-tech">
+                    <span>Excel</span>
+                    <span>Dashboard</span>
+                    <span>Data Visualization</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon"><i class="fas fa-university"></i></div>
+                    <div class="project-links">
+                        <a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <h3><a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank">Banking Loan Approval & Credit Risk Analytics Dashboard</a></h3>
+                <p>Analyzes loan application data to identify approval trends, customer demographics, lending patterns, and loan performance metrics.</p>
+                <div class="project-tech">
+                    <span>Excel</span>
+                    <span>Pivot Tables</span>
+                    <span>Data Visualization</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header reveal">
+            <h2>Get in Touch</h2>
+            <p>Let's Connect</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-links">
+                <a href="tel:+919344257610" class="contact-link">
+                    <div class="icon"><i class="fas fa-phone"></i></div>
+                    <div class="text">
+                        <span>Call Me</span>
+                        <strong>+91 9344257610</strong>
+                    </div>
+                </a>
+                <a href="mailto:seeni3188@gmail.com" class="contact-link">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <div class="text">
+                        <span>Email</span>
+                        <strong>seeni3188@gmail.com</strong>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/seenivasan0206" target="_blank" class="contact-link">
+                    <div class="icon"><i class="fab fa-linkedin"></i></div>
+                    <div class="text">
+                        <span>LinkedIn</span>
+                        <strong>seenivasan-v</strong>
+                    </div>
+                </a>
+                <a href="https://github.com/seenivasan0206" target="_blank" class="contact-link">
+                    <div class="icon"><i class="fab fa-github"></i></div>
+                    <div class="text">
+                        <span>GitHub</span>
+                        <strong>seenivasan0206</strong>
+                    </div>
+                </a>
+                <a href="Seenivasan-CV.pdf" download="Seenivasan-CV.pdf" class="contact-link">
+                    <div class="icon"><i class="fas fa-file-download"></i></div>
+                    <div class="text">
+                        <span>Download</span>
+                        <strong>Resume</strong>
+                    </div>
+                </a>
+            </div>
+            <div class="contact-cta">
+                <div class="status-dot"></div>
+                <h3>Available for work</h3>
+                <p>Open to opportunities and collaborations in data analysis and visualization.</p>
+                <a href="Seenivasan-CV.pdf" download="Seenivasan-CV.pdf" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/seenivasan0206" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/seenivasan0206" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:seeni3188@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p class="footer-text">&copy; 2026 Seenivasan V. Built with passion.</p>
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div class="copy-toast">Email copied to clipboard</div>
+
+    <script>document.documentElement.classList.add('js-pending');</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script src="js/lenis-scroll.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
