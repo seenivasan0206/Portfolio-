@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-    --bg: #060609;
-    --bg-elevated: #0d0d14;
-    --bg-card: #111118;
-    --bg-card-hover: #16161f;
+    --bg: #0a0510;
+    --bg-elevated: #16102e;
+    --bg-card: #1a1042;
+    --bg-card-hover: #241852;
     --text: #e4e4eb;
     --text-muted: #9494a8;
     --text-dim: #5c5c72;
@@ -16,7 +16,7 @@
     --gradient-hover: linear-gradient(135deg, #9d7af7 0%, #7477f5 50%, #22c9b7 100%);
     --border: rgba(255, 255, 255, 0.06);
     --border-hover: rgba(139, 92, 246, 0.3);
-    --nav-bg: rgba(6, 6, 9, 0.85);
+    --nav-bg: rgba(10, 5, 16, 0.85);
 }
 
 html.lenis {
@@ -122,6 +122,12 @@ nav {
     position: relative;
     padding: 0.25rem 0;
 }
+.nav-links a:hover {
+    color: var(--text);
+}
+.nav-links a:hover::after {
+    width: 100%;
+}
 
 .nav-links a::after {
     content: '';
@@ -132,6 +138,7 @@ nav {
     width: 0%;
     background: var(--gradient);
     border-radius: 2px;
+    transition: width 0.3s ease;
 }
 
 .nav-links a.active {
@@ -178,7 +185,7 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(6, 6, 9, 0.96);
+    background: rgba(10, 5, 16, 0.96);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
@@ -257,6 +264,17 @@ nav {
     background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.06) 0%, transparent 40%);
     pointer-events: none;
+}
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+    z-index: 1;
 }
 
 .hero-badge {
@@ -791,7 +809,7 @@ section {
     padding: 2.5rem;
     border-radius: 16px;
     border: 1px solid var(--border);
-    text-align: center;
+    text-align: left;
     position: relative;
     overflow: hidden;
 }
@@ -828,6 +846,69 @@ section {
 .contact-cta .btn {
     background: var(--gradient);
     color: white;
+}
+.cta-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    letter-spacing: 0.03em;
+    margin-bottom: 1.25rem;
+}
+.cta-eyebrow .status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--teal);
+    border-radius: 50%;
+    margin: 0;
+    box-shadow: 0 0 8px var(--teal-glow);
+    animation: pulse 2s ease-in-out infinite;
+}
+.cta-pitch {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+.cta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+.cta-tag {
+    padding: 0.4rem 0.85rem;
+    background: var(--bg-elevated);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: all 0.25s ease;
+}
+.cta-tag:hover {
+    background: var(--violet);
+    color: white;
+    border-color: var(--violet);
+}
+.cta-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+}
+.cta-meta i {
+    margin-right: 0.5rem;
+    color: var(--text-dim);
 }
 
 footer {
