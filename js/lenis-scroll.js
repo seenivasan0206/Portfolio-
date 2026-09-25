@@ -14,12 +14,12 @@
         }
 
         lenis = new Lenis({
-            duration: 2.0,
+            duration: 1.05,
             easing: function(t) {
                 return Math.min(1, 1.001 - Math.pow(2, -10 * t));
             },
             smoothWheel: true,
-            wheelMultiplier: 0.75,
+            wheelMultiplier: 1.1,
             touchMultiplier: 1.2,
             normalizeWheel: true
         });

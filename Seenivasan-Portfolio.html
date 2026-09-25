@@ -16,6 +16,218 @@
 <body>
     <div class="scroll-progress"></div>
 
+    <!-- Dynamic Ambient Background Mesh & Glow Orbs -->
+    <div class="ambient-bg" aria-hidden="true">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="bg-grid-overlay"></div>
+    </div>
+
+    <!-- 3D Realistic Butterflies at the Corner -->
+    <div class="butterfly-corner" aria-hidden="true">
+        <!-- Reusable Biological SVG Assets -->
+        <svg class="butterfly-defs-svg" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+            <defs>
+                <!-- Blue Morpho Gradients (Butterfly 1) -->
+                <linearGradient id="morphoFore1" x1="100%" y1="50%" x2="0%" y2="20%">
+                    <stop offset="0%" stop-color="#050314" />
+                    <stop offset="16%" stop-color="#1e1050" />
+                    <stop offset="38%" stop-color="#2563eb" />
+                    <stop offset="68%" stop-color="#00d8f6" />
+                    <stop offset="88%" stop-color="#38bdf8" />
+                    <stop offset="100%" stop-color="#cffafe" />
+                </linearGradient>
+                <linearGradient id="morphoHind1" x1="100%" y1="20%" x2="0%" y2="85%">
+                    <stop offset="0%" stop-color="#0a0524" />
+                    <stop offset="25%" stop-color="#311068" />
+                    <stop offset="55%" stop-color="#1d4ed8" />
+                    <stop offset="80%" stop-color="#06b6d4" />
+                    <stop offset="100%" stop-color="#5eead4" />
+                </linearGradient>
+
+                <!-- Emerald Swallowtail Gradients (Butterfly 2) -->
+                <linearGradient id="emeraldFore2" x1="100%" y1="50%" x2="0%" y2="20%">
+                    <stop offset="0%" stop-color="#040914" />
+                    <stop offset="20%" stop-color="#064e3b" />
+                    <stop offset="45%" stop-color="#059669" />
+                    <stop offset="70%" stop-color="#10b981" />
+                    <stop offset="88%" stop-color="#34d399" />
+                    <stop offset="100%" stop-color="#a7f3d0" />
+                </linearGradient>
+                <linearGradient id="emeraldHind2" x1="100%" y1="20%" x2="0%" y2="85%">
+                    <stop offset="0%" stop-color="#080720" />
+                    <stop offset="30%" stop-color="#2e1065" />
+                    <stop offset="60%" stop-color="#047857" />
+                    <stop offset="85%" stop-color="#14b8a6" />
+                    <stop offset="100%" stop-color="#6ee7b7" />
+                </linearGradient>
+            </defs>
+        </svg>
+
+        <!-- Main 3D Butterfly (Blue Morpho) - Fixed in Corner Position -->
+        <div class="butterfly-wrapper butterfly-1">
+            <div class="butterfly-shadow"></div>
+            <div class="butterfly-3d">
+                <!-- Left Wing Hinge -->
+                <div class="wing-group wing-left">
+                    <svg class="wing-svg" viewBox="0 0 100 130">
+                        <g>
+                            <!-- Hindwing -->
+                            <path class="hindwing-path" d="M 96,65 C 80,68 55,75 35,92 C 22,103 18,118 24,124 C 28,128 34,122 36,116 C 40,110 46,122 52,120 C 58,118 64,114 74,106 C 88,95 95,80 97,65 Z"
+                                  fill="url(#morphoHind1)" stroke="#060312" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 92,72 C 78,80 58,92 38,108 M 82,78 C 68,90 52,108 48,118 M 88,82 C 75,95 65,108 68,115"
+                                  fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.1" stroke-linecap="round"/>
+                            <circle cx="28" cy="115" r="1.6" fill="#e0f2fe"/>
+                            <circle cx="42" cy="118" r="1.6" fill="#e0f2fe"/>
+                            <circle cx="60" cy="114" r="1.6" fill="#e0f2fe"/>
+                            <!-- Forewing -->
+                            <path class="forewing-path" d="M 96,68 C 88,38 65,10 12,2 C 4,1 0,8 3,18 C 10,40 18,65 30,85 C 42,98 68,92 96,68 Z"
+                                  fill="url(#morphoFore1)" stroke="#060312" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 90,62 C 68,45 45,28 18,12 M 75,55 C 50,42 32,32 14,24 M 65,65 C 48,58 35,52 20,45 M 58,72 C 42,70 32,68 22,65 M 72,75 C 58,82 48,88 38,82"
+                                  fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-linecap="round"/>
+                            <!-- Marginal fringe spots -->
+                            <circle cx="8" cy="12" r="1.5" fill="#ffffff"/>
+                            <circle cx="14" cy="30" r="1.4" fill="#ffffff"/>
+                            <circle cx="20" cy="50" r="1.4" fill="#ffffff"/>
+                            <circle cx="26" cy="68" r="1.4" fill="#ffffff"/>
+                            <circle cx="34" cy="80" r="1.4" fill="#ffffff"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Right Wing Hinge (Mirrored) -->
+                <div class="wing-group wing-right">
+                    <svg class="wing-svg" viewBox="0 0 100 130">
+                        <g transform="translate(100, 0) scale(-1, 1)">
+                            <!-- Hindwing -->
+                            <path class="hindwing-path" d="M 96,65 C 80,68 55,75 35,92 C 22,103 18,118 24,124 C 28,128 34,122 36,116 C 40,110 46,122 52,120 C 58,118 64,114 74,106 C 88,95 95,80 97,65 Z"
+                                  fill="url(#morphoHind1)" stroke="#060312" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 92,72 C 78,80 58,92 38,108 M 82,78 C 68,90 52,108 48,118 M 88,82 C 75,95 65,108 68,115"
+                                  fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.1" stroke-linecap="round"/>
+                            <circle cx="28" cy="115" r="1.6" fill="#e0f2fe"/>
+                            <circle cx="42" cy="118" r="1.6" fill="#e0f2fe"/>
+                            <circle cx="60" cy="114" r="1.6" fill="#e0f2fe"/>
+                            <!-- Forewing -->
+                            <path class="forewing-path" d="M 96,68 C 88,38 65,10 12,2 C 4,1 0,8 3,18 C 10,40 18,65 30,85 C 42,98 68,92 96,68 Z"
+                                  fill="url(#morphoFore1)" stroke="#060312" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 90,62 C 68,45 45,28 18,12 M 75,55 C 50,42 32,32 14,24 M 65,65 C 48,58 35,52 20,45 M 58,72 C 42,70 32,68 22,65 M 72,75 C 58,82 48,88 38,82"
+                                  fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-linecap="round"/>
+                            <circle cx="8" cy="12" r="1.5" fill="#ffffff"/>
+                            <circle cx="14" cy="30" r="1.4" fill="#ffffff"/>
+                            <circle cx="20" cy="50" r="1.4" fill="#ffffff"/>
+                            <circle cx="26" cy="68" r="1.4" fill="#ffffff"/>
+                            <circle cx="34" cy="80" r="1.4" fill="#ffffff"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Anatomical Body -->
+                <div class="butterfly-core">
+                    <svg viewBox="0 0 24 96">
+                        <!-- Clubbed Antennae -->
+                        <path class="antenna" d="M 10,22 Q 4,8 0,2" fill="none" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round"/>
+                        <circle cx="0" cy="2" r="1.8" fill="#38bdf8"/>
+                        <path class="antenna" d="M 14,22 Q 20,8 24,2" fill="none" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round"/>
+                        <circle cx="24" cy="2" r="1.8" fill="#38bdf8"/>
+                        <!-- Head & Compound Eyes -->
+                        <circle cx="12" cy="25" r="4.5" fill="#1e1040" stroke="#00f0ff" stroke-width="0.8"/>
+                        <circle cx="8" cy="24" r="2.2" fill="#090518" stroke="#38bdf8" stroke-width="0.6"/>
+                        <circle cx="16" cy="24" r="2.2" fill="#090518" stroke="#38bdf8" stroke-width="0.6"/>
+                        <!-- Thorax -->
+                        <ellipse cx="12" cy="36" rx="5" ry="8" fill="url(#morphoFore1)" stroke="#090518" stroke-width="1"/>
+                        <!-- Segmented Abdomen -->
+                        <path d="M 9,45 Q 12,47 15,45 L 14.5,52 Q 12,54 9.5,52 Z" fill="#2e1065"/>
+                        <path d="M 9.5,53 Q 12,55 14.5,53 L 14,60 Q 12,62 10,60 Z" fill="#1e1040"/>
+                        <path d="M 10,61 Q 12,63 14,61 L 13.5,68 Q 12,70 10.5,68 Z" fill="#170d35"/>
+                        <path d="M 10.5,69 Q 12,71 13.5,69 L 13,76 Q 12,78 11,76 Z" fill="#0f0724"/>
+                        <path d="M 11,77 Q 12,79 13,77 L 12,84 Z" fill="#080316"/>
+                        <ellipse cx="12" cy="35" rx="1.5" ry="4" fill="rgba(255,255,255,0.7)"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="butterfly-sparkles">
+                <span class="sparkle s-1"></span>
+                <span class="sparkle s-2"></span>
+                <span class="sparkle s-3"></span>
+            </div>
+        </div>
+
+        <!-- Companion 3D Butterfly (Emerald Swallowtail) - Fixed in Corner Position -->
+        <div class="butterfly-wrapper butterfly-2">
+            <div class="butterfly-shadow"></div>
+            <div class="butterfly-3d">
+                <!-- Left Wing Hinge -->
+                <div class="wing-group wing-left">
+                    <svg class="wing-svg" viewBox="0 0 100 130">
+                        <g>
+                            <path class="hindwing-path" d="M 96,65 C 80,68 55,75 35,92 C 22,103 18,118 24,124 C 28,128 34,122 36,116 C 40,110 46,122 52,120 C 58,118 64,114 74,106 C 88,95 95,80 97,65 Z"
+                                  fill="url(#emeraldHind2)" stroke="#03080e" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 92,72 C 78,80 58,92 38,108 M 82,78 C 68,90 52,108 48,118 M 88,82 C 75,95 65,108 68,115"
+                                  fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.1" stroke-linecap="round"/>
+                            <circle cx="28" cy="115" r="1.6" fill="#a7f3d0"/>
+                            <circle cx="42" cy="118" r="1.6" fill="#a7f3d0"/>
+                            <circle cx="60" cy="114" r="1.6" fill="#a7f3d0"/>
+                            <path class="forewing-path" d="M 96,68 C 88,38 65,10 12,2 C 4,1 0,8 3,18 C 10,40 18,65 30,85 C 42,98 68,92 96,68 Z"
+                                  fill="url(#emeraldFore2)" stroke="#03080e" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 90,62 C 68,45 45,28 18,12 M 75,55 C 50,42 32,32 14,24 M 65,65 C 48,58 35,52 20,45 M 58,72 C 42,70 32,68 22,65 M 72,75 C 58,82 48,88 38,82"
+                                  fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-linecap="round"/>
+                            <circle cx="8" cy="12" r="1.5" fill="#fef08a"/>
+                            <circle cx="14" cy="30" r="1.4" fill="#fef08a"/>
+                            <circle cx="20" cy="50" r="1.4" fill="#fef08a"/>
+                            <circle cx="26" cy="68" r="1.4" fill="#fef08a"/>
+                            <circle cx="34" cy="80" r="1.4" fill="#fef08a"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Right Wing Hinge (Mirrored) -->
+                <div class="wing-group wing-right">
+                    <svg class="wing-svg" viewBox="0 0 100 130">
+                        <g transform="translate(100, 0) scale(-1, 1)">
+                            <path class="hindwing-path" d="M 96,65 C 80,68 55,75 35,92 C 22,103 18,118 24,124 C 28,128 34,122 36,116 C 40,110 46,122 52,120 C 58,118 64,114 74,106 C 88,95 95,80 97,65 Z"
+                                  fill="url(#emeraldHind2)" stroke="#03080e" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 92,72 C 78,80 58,92 38,108 M 82,78 C 68,90 52,108 48,118 M 88,82 C 75,95 65,108 68,115"
+                                  fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.1" stroke-linecap="round"/>
+                            <circle cx="28" cy="115" r="1.6" fill="#a7f3d0"/>
+                            <circle cx="42" cy="118" r="1.6" fill="#a7f3d0"/>
+                            <circle cx="60" cy="114" r="1.6" fill="#a7f3d0"/>
+                            <path class="forewing-path" d="M 96,68 C 88,38 65,10 12,2 C 4,1 0,8 3,18 C 10,40 18,65 30,85 C 42,98 68,92 96,68 Z"
+                                  fill="url(#emeraldFore2)" stroke="#03080e" stroke-width="2" stroke-linejoin="round"/>
+                            <path class="veins" d="M 90,62 C 68,45 45,28 18,12 M 75,55 C 50,42 32,32 14,24 M 65,65 C 48,58 35,52 20,45 M 58,72 C 42,70 32,68 22,65 M 72,75 C 58,82 48,88 38,82"
+                                  fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-linecap="round"/>
+                            <circle cx="8" cy="12" r="1.5" fill="#fef08a"/>
+                            <circle cx="14" cy="30" r="1.4" fill="#fef08a"/>
+                            <circle cx="20" cy="50" r="1.4" fill="#fef08a"/>
+                            <circle cx="26" cy="68" r="1.4" fill="#fef08a"/>
+                            <circle cx="34" cy="80" r="1.4" fill="#fef08a"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Anatomical Body -->
+                <div class="butterfly-core">
+                    <svg viewBox="0 0 24 96">
+                        <path class="antenna" d="M 10,22 Q 4,8 0,2" fill="none" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round"/>
+                        <circle cx="0" cy="2" r="1.8" fill="#10b981"/>
+                        <path class="antenna" d="M 14,22 Q 20,8 24,2" fill="none" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round"/>
+                        <circle cx="24" cy="2" r="1.8" fill="#10b981"/>
+                        <circle cx="12" cy="25" r="4.5" fill="#064e3b" stroke="#10b981" stroke-width="0.8"/>
+                        <circle cx="8" cy="24" r="2.2" fill="#022c22" stroke="#34d399" stroke-width="0.6"/>
+                        <circle cx="16" cy="24" r="2.2" fill="#022c22" stroke="#34d399" stroke-width="0.6"/>
+                        <ellipse cx="12" cy="36" rx="5" ry="8" fill="url(#emeraldFore2)" stroke="#022c22" stroke-width="1"/>
+                        <path d="M 9,45 Q 12,47 15,45 L 14.5,52 Q 12,54 9.5,52 Z" fill="#064e3b"/>
+                        <path d="M 9.5,53 Q 12,55 14.5,53 L 14,60 Q 12,62 10,60 Z" fill="#022c22"/>
+                        <path d="M 10,61 Q 12,63 14,61 L 13.5,68 Q 12,70 10.5,68 Z" fill="#0f172a"/>
+                        <path d="M 10.5,69 Q 12,71 13.5,69 L 13,76 Q 12,78 11,76 Z" fill="#090d16"/>
+                        <path d="M 11,77 Q 12,79 13,77 L 12,84 Z" fill="#030712"/>
+                        <ellipse cx="12" cy="35" rx="1.5" ry="4" fill="rgba(255,255,255,0.7)"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <nav>
         <div class="nav-container">
             <a href="#" class="nav-logo">SV<span>.</span></a>
@@ -42,31 +254,160 @@
         <a href="#contact">Contact</a>
     </div>
 
-    <div class="hero">
-        <div class="hero-badge">
-            <span class="dot"></span> Available for work
-        </div>
-        <h1>Seenivasan V<br><span>Data Analyst</span></h1>
-        <div class="hero-chart">
-            <svg viewBox="0 0 280 120" preserveAspectRatio="none">
-                <defs>
-                    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <polyline class="chart-line" points="0,90 40,70 80,80 120,45 160,55 200,25 240,35 280,10" />
-                <circle class="chart-dot" cx="280" cy="10" r="4" fill="#14b8a6" />
-            </svg>
-        </div>
-        <p class="hero-subtitle">Transforming complex data into meaningful insights through analysis and compelling visualizations.</p>
-        <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">
-                <i class="fas fa-folder"></i> View Projects
-            </a>
-            <a href="#contact" class="btn btn-outline">
-                <i class="fas fa-envelope"></i> Get in Touch
-            </a>
+    <div class="hero" id="hero">
+        <div class="hero-container">
+            <!-- Left Column: Bio & Introduction -->
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    <span class="badge-text">Available for Opportunities</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="hero-greeting">Hi, I'm</span>
+                    <span class="hero-name">Seenivasan V</span>
+                    <span class="hero-role-text">Data Analyst <span class="role-amp">&</span> Full Stack Developer</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Transforming complex data into actionable business intelligence through exploratory analysis, interactive <strong>Power BI</strong> dashboards, and modern <strong>Python &amp; SQL</strong> solutions.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-folder-open"></i> View Projects
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-paper-plane"></i> Get in Touch
+                    </a>
+                </div>
+
+                <div class="hero-stats-row">
+                    <div class="hero-stat-item">
+                        <span class="stat-val">3+</span>
+                        <span class="stat-lbl">Analytics Projects</span>
+                    </div>
+                    <div class="hero-stat-sep"></div>
+                    <div class="hero-stat-item">
+                        <span class="stat-val">10K+</span>
+                        <span class="stat-lbl">Records Analyzed</span>
+                    </div>
+                    <div class="hero-stat-sep"></div>
+                    <div class="hero-stat-item">
+                        <span class="stat-val">100%</span>
+                        <span class="stat-lbl">Data Integrity</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Glassmorphic Live Analytics Hub -->
+            <div class="hero-visual">
+                <!-- Floating Decorative Insight Badges (positioned to not collide with butterflies) -->
+                <div class="hero-float-badge float-top-left">
+                    <div class="badge-icon bi-pbi"><i class="fas fa-chart-pie"></i></div>
+                    <div class="badge-info">
+                        <span class="b-label">Power BI Dashboards</span>
+                        <span class="b-sub">Interactive Business Insights</span>
+                    </div>
+                </div>
+
+                <div class="hero-float-badge float-bottom-right">
+                    <div class="badge-icon bi-python"><i class="fab fa-python"></i></div>
+                    <div class="badge-info">
+                        <span class="b-label">Python &amp; SQL Pipeline</span>
+                        <span class="b-sub">Automated ETL &amp; Modeling</span>
+                    </div>
+                </div>
+
+                <!-- Main Glass Analytics Dashboard Card -->
+                <div class="hero-console-card">
+                    <div class="console-header">
+                        <div class="console-controls">
+                            <span class="dot-ctrl dot-red"></span>
+                            <span class="dot-ctrl dot-yellow"></span>
+                            <span class="dot-ctrl dot-green"></span>
+                        </div>
+                        <div class="console-title">
+                            <i class="fas fa-terminal"></i>
+                            <span>seenivasan_insights.py</span>
+                        </div>
+                        <div class="console-status">
+                            <span class="pulse-indicator"></span>
+                            <span>LIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="console-body">
+                        <!-- Metric Cards Row -->
+                        <div class="console-metrics">
+                            <div class="metric-box">
+                                <span class="m-title">Data Accuracy</span>
+                                <div class="m-num-row">
+                                    <span class="m-val">99.8%</span>
+                                    <span class="m-trend trend-up"><i class="fas fa-check-circle"></i> Verified</span>
+                                </div>
+                                <span class="m-sub">ETL &amp; Validation</span>
+                            </div>
+                            <div class="metric-box">
+                                <span class="m-title">Interactive Reports</span>
+                                <div class="m-num-row">
+                                    <span class="m-val">2+</span>
+                                    <span class="m-trend trend-up"><i class="fas fa-chart-pie"></i> Real-time</span>
+                                </div>
+                                <span class="m-sub">Power BI &amp; Excel</span>
+                            </div>
+                        </div>
+
+                        <!-- Data Visualization Chart -->
+                        <div class="console-chart-wrapper">
+                            <div class="chart-header-row">
+                                <span class="chart-tag"><i class="fas fa-chart-line"></i> Performance Trendline</span>
+                                <span class="chart-period">Monthly Velocity</span>
+                            </div>
+                            <svg class="analytics-svg" viewBox="0 0 380 130" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.45"/>
+                                        <stop offset="60%" stop-color="#14b8a6" stop-opacity="0.12"/>
+                                        <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.0"/>
+                                    </linearGradient>
+                                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#8b5cf6"/>
+                                        <stop offset="50%" stop-color="#6366f1"/>
+                                        <stop offset="100%" stop-color="#14b8a6"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Grid Lines -->
+                                <line x1="10" y1="25" x2="370" y2="25" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                                <line x1="10" y1="60" x2="370" y2="60" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                                <line x1="10" y1="95" x2="370" y2="95" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                                
+                                <!-- Filled Glow Area -->
+                                <path class="chart-area-path" d="M 15,100 C 60,85 90,95 130,55 C 170,25 210,75 260,40 C 300,15 330,30 365,18 L 365,120 L 15,120 Z" fill="url(#areaGradient)"/>
+                                
+                                <!-- Glowing Spline Curve -->
+                                <path class="chart-curve-path" d="M 15,100 C 60,85 90,95 130,55 C 170,25 210,75 260,40 C 300,15 330,30 365,18" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round"/>
+                                
+                                <!-- Secondary Comparison Curve (Dotted) -->
+                                <path class="chart-compare-path" d="M 15,115 C 60,105 100,110 140,85 C 180,60 220,95 270,75 C 310,55 340,65 365,45" fill="none" stroke="rgba(20, 184, 166, 0.4)" stroke-width="1.8" stroke-dasharray="4 4"/>
+
+                                <!-- Interactive Data Points -->
+                                <circle cx="130" cy="55" r="4.5" class="chart-point" fill="#8b5cf6" stroke="#ffffff" stroke-width="1.5"/>
+                                <circle cx="260" cy="40" r="4.5" class="chart-point" fill="#6366f1" stroke="#ffffff" stroke-width="1.5"/>
+                                <circle cx="365" cy="18" r="5.5" class="chart-point point-pulse" fill="#14b8a6" stroke="#ffffff" stroke-width="2"/>
+                            </svg>
+                        </div>
+
+                        <!-- Core Capabilities Mini Strip -->
+                        <div class="console-skills-strip">
+                            <span class="c-skill"><i class="fab fa-python"></i> Python</span>
+                            <span class="c-skill"><i class="fas fa-database"></i> SQL</span>
+                            <span class="c-skill"><i class="fas fa-chart-column"></i> Power BI</span>
+                            <span class="c-skill"><i class="fas fa-code"></i> Full Stack</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -127,12 +468,14 @@
                 </div>
             </div>
             <div class="skill-category">
-                <h3><i class="fas fa-code"></i> Frontend</h3>
+                <h3><i class="fas fa-code"></i> Python Full Stack & Web</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">HTML</span>
-                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
                     <span class="skill-tag">JavaScript</span>
                     <span class="skill-tag">Responsive Design</span>
+                    <span class="skill-tag">Flask</span>
                 </div>
             </div>
             <div class="skill-category">
@@ -171,92 +514,370 @@
                     Currently training as a Data Analyst Trainee at C Cube Technologies (Jan 2026 – Present), focusing on Excel, SQL, Python, and Power BI. Completed two hands-on dashboards analyzing loan approval risk and mobile/laptop sales performance.
                 </div>
             </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-role">Python Full Stack Web Development Trainee</div>
+                        <div class="experience-company">C Cube Technologies</div>
+                        <div class="experience-duration">2025 – 2026</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Developed full-stack web applications integrating Python back-end logic with responsive HTML5, CSS3, and JavaScript front-end interfaces.</li>
+                    <li>Engineered responsive, mobile-first web layouts using CSS Flexbox, Grid, and media queries to ensure seamless viewing and fluid touch interaction across mobile, tablet, and desktop devices.</li>
+                    <li>Built interactive clientside functionality using vanilla JavaScript, including dynamic DOM manipulation, real-time input validation, event listeners, and asynchronous data handling.</li>
+                    <li>Architected the <a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank">Job Portal Web Application</a> with Python (Flask) and SQL database connectivity, enabling multi-criteria filtering, search, and dynamic listings.</li>
+                    <li>Implemented responsive navigation bars, accessible component states, and cross-browser styling adhering to modern web development standards.</li>
+                </ul>
+                <div class="experience-summary">
+                    Trained in Python Full Stack Web Development at C Cube Technologies, mastering Python, HTML, CSS, JavaScript, and responsive design principles with SQL database integration to build responsive, user-friendly web applications.
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="projects">
         <div class="section-header reveal">
-            <h2>Projects</h2>
-            <p>Some of the work I've done</p>
+            <div class="section-badge">
+                <i class="fas fa-folder-open"></i> Portfolio Showcase
+            </div>
+            <h2>Featured Projects</h2>
+            <p>Real-world data analytics dashboards, machine learning systems, and full-stack web applications</p>
         </div>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-icon"><i class="fas fa-droplet"></i></div>
-                    <div class="project-links">
-                        <a href="https://github.com/seenivasan0206/blood-group-fingerprint" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+
+        <!-- Interactive Category Filter Bar -->
+        <div class="project-filters reveal" role="tablist" aria-label="Project Categories">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+                <span>All Projects</span>
+                <span class="filter-count">5</span>
+            </button>
+            <button class="filter-btn" data-filter="data-bi" role="tab" aria-selected="false">
+                <i class="fas fa-chart-pie"></i>
+                <span>Data &amp; BI</span>
+                <span class="filter-count">2</span>
+            </button>
+            <button class="filter-btn" data-filter="fullstack" role="tab" aria-selected="false">
+                <i class="fas fa-code"></i>
+                <span>Full Stack Web</span>
+                <span class="filter-count">1</span>
+            </button>
+            <button class="filter-btn" data-filter="ai-iot" role="tab" aria-selected="false">
+                <i class="fas fa-brain"></i>
+                <span>AI &amp; IoT</span>
+                <span class="filter-count">2</span>
+            </button>
+        </div>
+
+        <div class="projects-bento">
+            <!-- 1. FLAGSHIP FEATURED PROJECT (Spans Full Width / 2 Columns) -->
+            <div class="project-card featured-project" data-category="data-bi">
+                <div class="featured-glow-line"></div>
+                <div class="featured-inner">
+                    <!-- Left: Project Narrative & Metrics -->
+                    <div class="featured-info">
+                        <div class="project-meta-row">
+                            <span class="badge-featured"><i class="fas fa-star"></i> Featured Project</span>
+                            <span class="badge-category cat-data">Financial Analytics</span>
+                        </div>
+
+                        <h3 class="featured-title">
+                            <a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank">
+                                Banking Loan Approval &amp; Credit Risk Analytics
+                            </a>
+                        </h3>
+
+                        <p class="featured-desc">
+                            End-to-end credit risk analytics dashboard evaluating 4,500+ loan applications to identify approval drivers, default exposure, applicant demographics, and risk-tier stratification.
+                        </p>
+
+                        <!-- Key Impact Metrics Strip -->
+                        <div class="project-impact-strip">
+                            <div class="impact-chip">
+                                <span class="chip-val">4,500+</span>
+                                <span class="chip-lbl">Loan Records</span>
+                            </div>
+                            <div class="impact-chip">
+                                <span class="chip-val">78.4%</span>
+                                <span class="chip-lbl">Approval Rate</span>
+                            </div>
+                            <div class="impact-chip">
+                                <span class="chip-val">3 Tiers</span>
+                                <span class="chip-lbl">Risk Scoring</span>
+                            </div>
+                        </div>
+
+                        <div class="project-tech">
+                            <span>Excel</span>
+                            <span>Pivot Tables</span>
+                            <span>Risk Modeling</span>
+                            <span>KPI Dashboards</span>
+                            <span>Data Cleaning</span>
+                        </div>
+
+                        <div class="project-card-footer">
+                            <a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank" class="btn-project-primary">
+                                <i class="fab fa-github"></i> View Repository
+                            </a>
+                            <span class="project-updated"><i class="fas fa-check-circle"></i> Production Ready</span>
+                        </div>
                     </div>
-                </div>
-                <h3><a href="https://github.com/seenivasan0206/blood-group-fingerprint" target="_blank">Blood Group Detection</a></h3>
-                <p>Machine learning model that predicts blood group from fingerprint images using advanced image processing techniques.</p>
-                <div class="project-tech">
-                    <span>Python</span>
-                    <span>ML</span>
-                    <span>Image Processing</span>
+
+                    <!-- Right: Interactive Embedded UI Mockup / Dashboard Preview -->
+                    <div class="featured-preview">
+                        <div class="preview-mockup-card">
+                            <div class="mockup-header">
+                                <div class="mockup-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="mockup-tag">loan_risk_model.xlsx</span>
+                                <span class="mockup-status">78.4% Passed</span>
+                            </div>
+                            <div class="mockup-body">
+                                <div class="mockup-stat-grid">
+                                    <div class="m-stat-box">
+                                        <span class="m-lbl">Avg Loan Amount</span>
+                                        <span class="m-val">&#8377;12.5L</span>
+                                        <span class="m-sub text-teal"><i class="fas fa-arrow-trend-up"></i> +8.2% YoY</span>
+                                    </div>
+                                    <div class="m-stat-box">
+                                        <span class="m-lbl">Default Risk</span>
+                                        <span class="m-val">4.2%</span>
+                                        <span class="m-sub text-green"><i class="fas fa-shield-halved"></i> Low Exposure</span>
+                                    </div>
+                                </div>
+                                <!-- Mini Visual Progress Distribution -->
+                                <div class="mockup-bars">
+                                    <div class="bar-header">
+                                        <span>Risk Stratification</span>
+                                        <span class="text-dim">4,500 Apps</span>
+                                    </div>
+                                    <div class="progress-stacked">
+                                        <div class="prog-segment seg-low" style="width: 62%" title="Low Risk: 62%"></div>
+                                        <div class="prog-segment seg-med" style="width: 26%" title="Medium Risk: 26%"></div>
+                                        <div class="prog-segment seg-high" style="width: 12%" title="High Risk: 12%"></div>
+                                    </div>
+                                    <div class="bar-legend">
+                                        <span><i class="dot-legend dot-teal"></i> Low (62%)</span>
+                                        <span><i class="dot-legend dot-violet"></i> Medium (26%)</span>
+                                        <span><i class="dot-legend dot-amber"></i> High (12%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-icon"><i class="fas fa-traffic-light"></i></div>
-                    <div class="project-links">
-                        <a href="https://github.com/seenivasan0206/IOT-Traffic-System" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            <!-- 2. SALES PERFORMANCE DASHBOARD -->
+            <div class="project-card" data-category="data-bi">
+                <!-- Visual Header Banner -->
+                <div class="card-visual-banner banner-sales">
+                    <div class="banner-top">
+                        <span class="badge-category cat-data"><i class="fas fa-chart-line"></i> Sales Intelligence</span>
+                        <a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank" class="card-ext-link" title="Open Repository">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="banner-mockup">
+                        <div class="mockup-kpi-pill">
+                            <span class="kpi-num">&#8377;48.2L</span>
+                            <span class="kpi-txt">Analyzed Revenue</span>
+                        </div>
+                        <svg class="mini-sparkline" viewBox="0 0 160 45">
+                            <path d="M 5,35 Q 35,38 60,18 T 110,24 T 155,8" fill="none" stroke="#14b8a6" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="155" cy="8" r="3.5" fill="#14b8a6" stroke="#ffffff" stroke-width="1.5"/>
+                        </svg>
                     </div>
                 </div>
-                <h3><a href="https://github.com/seenivasan0206/IOT-Traffic-System" target="_blank">IoT Traffic System</a></h3>
-                <p>Smart traffic management system that optimizes signal timing based on real-time traffic density measurement.</p>
-                <div class="project-tech">
-                    <span>IoT</span>
-                    <span>Sensor</span>
-                    <span>Real-time</span>
+
+                <div class="card-content">
+                    <h3>
+                        <a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank">
+                            Mobile &amp; Laptop Sales Performance Dashboard
+                        </a>
+                    </h3>
+                    <p>
+                        Interactive multi-device retail analytics dashboard evaluating sales velocity, brand market share, dynamic quarterly trends, and margin performance.
+                    </p>
+
+                    <div class="card-highlights">
+                        <span><i class="fas fa-check"></i> Dynamic Slicers</span>
+                        <span><i class="fas fa-check"></i> SKU Breakdown</span>
+                        <span><i class="fas fa-check"></i> Revenue KPIs</span>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>Excel</span>
+                        <span>Pivot Charts</span>
+                        <span>Data Modeling</span>
+                        <span>Sales KPIs</span>
+                    </div>
+
+                    <div class="card-footer-action">
+                        <a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank" class="link-btn">
+                            <i class="fab fa-github"></i> View Repository <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-icon"><i class="fas fa-briefcase"></i></div>
-                    <div class="project-links">
-                        <a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            <!-- 3. JOB PORTAL WEB APPLICATION -->
+            <div class="project-card" data-category="fullstack">
+                <!-- Visual Header Banner -->
+                <div class="card-visual-banner banner-web">
+                    <div class="banner-top">
+                        <span class="badge-category cat-web"><i class="fas fa-code"></i> Python Full Stack</span>
+                        <a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank" class="card-ext-link" title="Open Repository">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="banner-mockup">
+                        <div class="sim-search-bar">
+                            <i class="fas fa-magnifying-glass"></i>
+                            <span>Search Data Analyst, Python...</span>
+                            <span class="sim-badge">100+ Jobs</span>
+                        </div>
                     </div>
                 </div>
-                <h3><a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank">Job Portal</a></h3>
-                <p>Full-featured web application for job seekers with advanced filtering, search, and application tracking.</p>
-                <div class="project-tech">
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JavaScript</span>
+
+                <div class="card-content">
+                    <h3>
+                        <a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank">
+                            Job Portal Full-Stack Web Application
+                        </a>
+                    </h3>
+                    <p>
+                        Comprehensive recruitment portal engineered with Python (Flask) back-end, relational SQL database management, and responsive clientside UI for seamless job applicant tracking.
+                    </p>
+
+                    <div class="card-highlights">
+                        <span><i class="fas fa-check"></i> Multi-filter Search</span>
+                        <span><i class="fas fa-check"></i> SQL Persistence</span>
+                        <span><i class="fas fa-check"></i> Mobile Responsive</span>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>Python (Flask)</span>
+                        <span>SQL</span>
+                        <span>HTML5/CSS3</span>
+                        <span>JavaScript</span>
+                        <span>REST API</span>
+                    </div>
+
+                    <div class="card-footer-action">
+                        <a href="https://github.com/seenivasan0206/job-portal-web-app" target="_blank" class="link-btn">
+                            <i class="fab fa-github"></i> View Repository <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="project-links">
-                        <a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            <!-- 4. BLOOD GROUP DETECTION VIA FINGERPRINT -->
+            <div class="project-card" data-category="ai-iot">
+                <!-- Visual Header Banner -->
+                <div class="card-visual-banner banner-ml">
+                    <div class="banner-top">
+                        <span class="badge-category cat-ai"><i class="fas fa-brain"></i> Machine Learning</span>
+                        <a href="https://github.com/seenivasan0206/blood-group-fingerprint" target="_blank" class="card-ext-link" title="Open Repository">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="banner-mockup">
+                        <div class="bio-scan-preview">
+                            <div class="bio-scan-icon"><i class="fas fa-fingerprint"></i></div>
+                            <div class="bio-scan-meta">
+                                <span class="bio-status">Feature Extracted</span>
+                                <span class="bio-result">Prediction: A+ (96.4%)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <h3><a href="https://github.com/seenivasan0206/Mobile-Laptop-Sales-Dashboard" target="_blank">Mobile & Laptop Sales Dashboard</a></h3>
-                <p>Interactive Excel dashboard for analyzing mobile and laptop sales data with key performance metrics and visualizations.</p>
-                <div class="project-tech">
-                    <span>Excel</span>
-                    <span>Dashboard</span>
-                    <span>Data Visualization</span>
+
+                <div class="card-content">
+                    <h3>
+                        <a href="https://github.com/seenivasan0206/blood-group-fingerprint" target="_blank">
+                            Blood Group Detection via Fingerprint
+                        </a>
+                    </h3>
+                    <p>
+                        Intelligent biometric classifier trained to predict ABO blood grouping from dermatoglyphic fingerprint patterns using computer vision and machine learning feature extraction.
+                    </p>
+
+                    <div class="card-highlights">
+                        <span><i class="fas fa-check"></i> Image Processing</span>
+                        <span><i class="fas fa-check"></i> Feature Extraction</span>
+                        <span><i class="fas fa-check"></i> 96.4% Accuracy</span>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Machine Learning</span>
+                        <span>Image Processing</span>
+                        <span>NumPy</span>
+                    </div>
+
+                    <div class="card-footer-action">
+                        <a href="https://github.com/seenivasan0206/blood-group-fingerprint" target="_blank" class="link-btn">
+                            <i class="fab fa-github"></i> View Repository <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-icon"><i class="fas fa-university"></i></div>
-                    <div class="project-links">
-                        <a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            <!-- 5. SMART IOT TRAFFIC MANAGEMENT SYSTEM -->
+            <div class="project-card" data-category="ai-iot">
+                <!-- Visual Header Banner -->
+                <div class="card-visual-banner banner-iot">
+                    <div class="banner-top">
+                        <span class="badge-category cat-iot"><i class="fas fa-satellite-dish"></i> Embedded Systems</span>
+                        <a href="https://github.com/seenivasan0206/IOT-Traffic-System" target="_blank" class="card-ext-link" title="Open Repository">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="banner-mockup">
+                        <div class="traffic-preview">
+                            <div class="signal-lights">
+                                <span class="sig-dot red"></span>
+                                <span class="sig-dot yellow"></span>
+                                <span class="sig-dot green active"></span>
+                            </div>
+                            <div class="signal-info">
+                                <span class="sig-title">Adaptive Signal Timing</span>
+                                <span class="sig-stat">-35% Wait Duration</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <h3><a href="https://github.com/seenivasan0206/Banking-Loan-Approval-Dashboard" target="_blank">Banking Loan Approval & Credit Risk Analytics Dashboard</a></h3>
-                <p>Analyzes loan application data to identify approval trends, customer demographics, lending patterns, and loan performance metrics.</p>
-                <div class="project-tech">
-                    <span>Excel</span>
-                    <span>Pivot Tables</span>
-                    <span>Data Visualization</span>
+
+                <div class="card-content">
+                    <h3>
+                        <a href="https://github.com/seenivasan0206/IOT-Traffic-System" target="_blank">
+                            Smart IoT Traffic Management System
+                        </a>
+                    </h3>
+                    <p>
+                        Automated smart traffic controller optimizing real-time intersection signal switching dynamically based on ultrasonic density sensing, reducing vehicle wait times.
+                    </p>
+
+                    <div class="card-highlights">
+                        <span><i class="fas fa-check"></i> Real-time Density</span>
+                        <span><i class="fas fa-check"></i> Adaptive Timing</span>
+                        <span><i class="fas fa-check"></i> Sensor Automation</span>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>IoT</span>
+                        <span>Ultrasonic Sensors</span>
+                        <span>Real-time Logic</span>
+                        <span>Embedded C</span>
+                    </div>
+
+                    <div class="card-footer-action">
+                        <a href="https://github.com/seenivasan0206/IOT-Traffic-System" target="_blank" class="link-btn">
+                            <i class="fab fa-github"></i> View Repository <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -344,7 +965,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
     <script src="js/lenis-scroll.js"></script>
