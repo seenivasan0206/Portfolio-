@@ -275,45 +275,49 @@
 
     function initSkills() {
         if (reduceMotion) return;
-        const grid = document.querySelector('.skills-grid');
-        if (!grid) return;
 
-        const cards = grid.querySelectorAll('.skill-category');
-        cards.forEach(function(card) {
-            gsap.fromTo(card,
-                { opacity: 0, y: 30, scale: 0.95 },
+        // Animate marquee entrance
+        const marquee = document.querySelector('.skills-marquee-container');
+        if (marquee) {
+            gsap.fromTo(marquee,
+                { opacity: 0, y: 25 },
                 {
-                    opacity: 1, y: 0, scale: 1,
+                    opacity: 1, y: 0,
                     duration: 0.75,
-                    ease: EASE_SPRING,
+                    ease: 'power2.out',
                     scrollTrigger: {
-                        trigger: card,
-                        start: 'top 88%',
+                        trigger: marquee,
+                        start: 'top 90%',
                         toggleActions: REVEAL_TOGGLE
                     }
                 }
             );
+        }
 
-            const tags = card.querySelectorAll('.skill-tag');
-            if (tags.length) {
-                gsap.fromTo(tags,
-                    { opacity: 0, scale: 0.4, y: 8 },
-                    {
-                        opacity: 1, scale: 1, y: 0,
-                        duration: 0.45,
-                        ease: EASE_POP,
-                        stagger: 0.035,
-                        overwrite: true,
-                        delay: 0.15,
-                        scrollTrigger: {
-                            trigger: card,
-                            start: 'top 88%',
-                            toggleActions: REVEAL_TOGGLE
-                        }
+        // Animate Floating Tech Cloud canvas & pills (organic center-outward bloom)
+        const canvas = document.querySelector('.skills-cloud-canvas');
+        if (!canvas) return;
+
+        const pills = canvas.querySelectorAll('.cloud-pill');
+        if (pills.length) {
+            gsap.fromTo(pills,
+                { opacity: 0, scale: 0.35, y: 25 },
+                {
+                    opacity: 1, scale: 1, y: 0,
+                    duration: 0.6,
+                    ease: 'back.out(2)',
+                    stagger: {
+                        each: 0.035,
+                        from: 'center'
+                    },
+                    scrollTrigger: {
+                        trigger: canvas,
+                        start: 'top 85%',
+                        toggleActions: REVEAL_TOGGLE
                     }
-                );
-            }
-        });
+                }
+            );
+        }
     }
 
     // 2-Column Experience scroll reveal (Left card slides from left, Right card slides from right)

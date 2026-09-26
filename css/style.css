@@ -1537,69 +1537,320 @@ section {
     letter-spacing: 0.08em;
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+/* ==========================================================================
+   Skills Section Redesign & Dynamic Animations
+   ========================================================================== */
+
+/* Section badge */
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.95rem;
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
 }
 
-.skill-category {
-    background: var(--card-surface);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 1.75rem;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--card-shadow);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+/* Continuous Infinite Marquee Ticker */
+.skills-marquee-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 2.25rem;
+    overflow: hidden;
+    position: relative;
+    padding: 0.5rem 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
-.skill-category:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-5px);
-    box-shadow: var(--card-shadow-hover);
+
+.skills-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 0.85rem;
+    animation: skillsMarquee 26s linear infinite;
 }
-.skill-category h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    color: var(--text);
-    margin-bottom: 1.25rem;
+
+.skills-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes skillsMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee-group {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    font-weight: 600;
-}
-.skill-category h3 i {
-    color: var(--violet);
-    font-size: 1rem;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
-}
-.skill-category:hover h3 i {
-    transform: scale(1.2) rotate(6deg);
-    color: var(--teal);
+    gap: 0.85rem;
+    flex-shrink: 0;
 }
 
-.skill-tags {
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 1.05rem;
+    background: rgba(26, 18, 46, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.marquee-item:hover {
+    transform: translateY(-2px) scale(1.04);
+    background: rgba(139, 92, 246, 0.16);
+    border-color: rgba(139, 92, 246, 0.45);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.25);
+}
+
+/* ==========================================================================
+   Minimalist Floating Tech Cloud Canvas (Borderless & Organic)
+   ========================================================================== */
+
+#skills {
+    max-width: 1200px;
+    padding-top: 2rem;
+}
+
+#skills .section-header {
+    margin-bottom: 2.25rem;
+}
+
+#skills .section-header p {
+    max-width: 650px;
+}
+
+.skills-cloud-canvas {
+    width: 100%;
+    max-width: 1100px;
+    margin: 1rem auto 0;
+    position: relative;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ambient Radial Glow behind the Cloud */
+.skills-cloud-canvas::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.14) 0%,
+        rgba(20, 184, 166, 0.08) 50%,
+        transparent 72%
+    );
+    filter: blur(44px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Organic Floating Pills Cluster */
+.cloud-cluster {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.15rem 1.25rem;
+    max-width: 1050px;
+    position: relative;
+    z-index: 2;
 }
 
-.skill-tag {
-    padding: 0.45rem 0.95rem;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+/* Base Cloud Pill */
+.cloud-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.72rem 1.35rem;
+    background: rgba(22, 16, 38, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    color: #e2e8f0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: default;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    position: relative;
+    user-select: none;
+    animation: cloudPillFloat var(--float-dur, 5s) ease-in-out infinite;
+    animation-delay: var(--float-delay, 0s);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease,
+                background 0.35s ease,
+                color 0.35s ease;
 }
-.skill-tag:hover {
-    transform: translateY(-3px) scale(1.06);
-    background: rgba(139, 92, 246, 0.2);
+
+.cloud-pill i {
+    font-size: 1.05rem;
+    color: var(--pill-color, var(--teal));
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* Floating Breathing Animation */
+@keyframes cloudPillFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Pill Hover Physics */
+.cloud-pill:hover {
+    animation-play-state: paused;
+    transform: translateY(-7px) scale(1.08);
+    background: rgba(30, 22, 52, 0.9);
+    border-color: var(--pill-color, var(--teal));
     color: #ffffff;
-    border-color: var(--violet);
-    box-shadow: 0 4px 14px var(--violet-glow);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 24px var(--pill-glow, rgba(20, 184, 166, 0.35));
+    z-index: 10;
+}
+
+.cloud-pill:hover i {
+    transform: scale(1.22) rotate(6deg);
+}
+
+/* Hero Power Stack Pills (Python, SQL, Power BI, Excel) */
+.cloud-pill.pill-hero {
+    padding: 0.85rem 1.65rem;
+    font-size: 1.02rem;
+    font-weight: 600;
+    gap: 0.95rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgba(32, 22, 58, 0.85), rgba(20, 16, 40, 0.85));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.cloud-pill.pill-hero .pill-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.cloud-pill.pill-hero .pill-icon i {
+    font-size: 1.22rem;
+}
+
+.cloud-pill.pill-hero .pill-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    text-align: left;
+}
+
+.cloud-pill.pill-hero .pill-text {
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.cloud-pill.pill-hero .pill-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--pill-color, var(--teal));
+    letter-spacing: 0.02em;
+}
+
+.cloud-pill.pill-hero:hover {
+    transform: translateY(-9px) scale(1.1);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 30px var(--pill-glow, rgba(20, 184, 166, 0.4));
+}
+
+.cloud-pill.pill-hero:hover .pill-icon {
+    transform: scale(1.15) rotate(6deg);
+    box-shadow: 0 0 16px var(--pill-color);
+}
+
+/* Category Color Palettes */
+.pill-cyan {
+    --pill-color: #38bdf8;
+    --pill-glow: rgba(56, 189, 248, 0.35);
+}
+.pill-blue {
+    --pill-color: #60a5fa;
+    --pill-glow: rgba(96, 165, 250, 0.35);
+}
+.pill-amber {
+    --pill-color: #f59e0b;
+    --pill-glow: rgba(245, 158, 11, 0.35);
+}
+.pill-emerald {
+    --pill-color: #10b981;
+    --pill-glow: rgba(16, 185, 129, 0.35);
+}
+.pill-purple {
+    --pill-color: #a855f7;
+    --pill-glow: rgba(168, 85, 247, 0.35);
+}
+.pill-yellow {
+    --pill-color: #facc15;
+    --pill-glow: rgba(250, 204, 21, 0.35);
+}
+.pill-orange {
+    --pill-color: #fb923c;
+    --pill-glow: rgba(251, 146, 60, 0.35);
+}
+.pill-pink {
+    --pill-color: #ec4899;
+    --pill-glow: rgba(236, 72, 153, 0.35);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .cloud-cluster {
+        gap: 0.75rem 0.85rem;
+    }
+    .cloud-pill {
+        padding: 0.6rem 1.05rem;
+        font-size: 0.82rem;
+    }
+    .cloud-pill.pill-hero {
+        padding: 0.72rem 1.2rem;
+        font-size: 0.92rem;
+    }
+    .cloud-pill.pill-hero .pill-icon {
+        width: 32px;
+        height: 32px;
+    }
+    .cloud-pill.pill-hero .pill-icon i {
+        font-size: 1.05rem;
+    }
 }
 
 .experience-list {
