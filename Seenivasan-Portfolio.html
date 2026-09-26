@@ -246,12 +246,62 @@
         </div>
     </nav>
 
-    <div class="mobile-nav">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+    <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-tag"><i class="fas fa-compass"></i> Explore</span>
+                <span class="mobile-nav-badge"><span class="dot"></span> Open to Work</span>
+            </div>
+
+            <div class="mobile-nav-items">
+                <a href="#about" class="mn-item">
+                    <div class="mn-left">
+                        <span class="mn-num">01</span>
+                        <span class="mn-label">About</span>
+                    </div>
+                    <i class="fas fa-arrow-right mn-arrow"></i>
+                </a>
+                <a href="#skills" class="mn-item">
+                    <div class="mn-left">
+                        <span class="mn-num">02</span>
+                        <span class="mn-label">Skills</span>
+                    </div>
+                    <i class="fas fa-arrow-right mn-arrow"></i>
+                </a>
+                <a href="#experience" class="mn-item">
+                    <div class="mn-left">
+                        <span class="mn-num">03</span>
+                        <span class="mn-label">Experience</span>
+                    </div>
+                    <i class="fas fa-arrow-right mn-arrow"></i>
+                </a>
+                <a href="#projects" class="mn-item">
+                    <div class="mn-left">
+                        <span class="mn-num">04</span>
+                        <span class="mn-label">Projects</span>
+                    </div>
+                    <i class="fas fa-arrow-right mn-arrow"></i>
+                </a>
+                <a href="#contact" class="mn-item">
+                    <div class="mn-left">
+                        <span class="mn-num">05</span>
+                        <span class="mn-label">Contact</span>
+                    </div>
+                    <i class="fas fa-arrow-right mn-arrow"></i>
+                </a>
+            </div>
+
+            <div class="mobile-nav-footer">
+                <a href="#contact" class="btn btn-primary mn-cta">
+                    <i class="fas fa-paper-plane"></i> Get in Touch
+                </a>
+                <div class="mn-socials">
+                    <a href="https://github.com/seenivasan0206" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/seenivasan-v-3453b02bb/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:seenivasan0206@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="hero" id="hero">
@@ -482,8 +532,8 @@
 
         <!-- Minimalist Floating Tech Cloud Canvas (Borderless & Organic) -->
         <div class="skills-cloud-canvas">
-            <div class="cloud-cluster">
-                <!-- Core Primary Power Stack (Hero Pills with Halos & Sub-badges) -->
+            <!-- 1. Core Primary Power Stack (2x2 grid on mobile, wide row on desktop) -->
+            <div class="cloud-hero-row">
                 <div class="cloud-pill pill-hero pill-cyan" style="--float-delay: 0s; --float-dur: 4.8s;">
                     <span class="pill-icon"><i class="fab fa-python"></i></span>
                     <div class="pill-info">
@@ -515,7 +565,10 @@
                         <span class="pill-badge">Modeling</span>
                     </div>
                 </div>
+            </div>
 
+            <!-- 2. Extended Specialized Tech Constellation -->
+            <div class="cloud-tags-cluster">
                 <!-- Analytics, ETL & Data Pipelines -->
                 <div class="cloud-pill pill-cyan" style="--float-delay: 0.4s; --float-dur: 4.9s;">
                     <i class="fas fa-network-wired"></i>
@@ -549,7 +602,7 @@
 
                 <div class="cloud-pill pill-blue" style="--float-delay: 2.4s; --float-dur: 5.5s;">
                     <i class="fas fa-magnifying-glass-chart"></i>
-                    <span>Exploratory Analysis (EDA)</span>
+                    <span>EDA Insights</span>
                 </div>
 
                 <!-- Web & Application Engineering -->

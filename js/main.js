@@ -8,25 +8,50 @@
         const mobileNav = document.querySelector('.mobile-nav');
         if (!hamburger || !mobileNav) return;
 
-        hamburger.addEventListener('click', function() {
-            const isOpen = mobileNav.classList.contains('open');
-            if (isOpen) {
-                mobileNav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
+        function openNav() {
+            mobileNav.classList.add('open');
+            hamburger.classList.add('open');
+            hamburger.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+            if (lenis && typeof lenis.stop === 'function') lenis.stop();
+        }
+
+        function closeNav() {
+            mobileNav.classList.remove('open');
+            hamburger.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            if (lenis && typeof lenis.start === 'function') lenis.start();
+        }
+
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (mobileNav.classList.contains('open')) {
+                closeNav();
             } else {
-                mobileNav.classList.add('open');
-                hamburger.classList.add('open');
-                document.body.style.overflow = 'hidden';
+                openNav();
             }
         });
 
+        // Close when clicking any link inside mobile-nav
         mobileNav.querySelectorAll('a').forEach(function(link) {
             link.addEventListener('click', function() {
-                mobileNav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
+                closeNav();
             });
+        });
+
+        // Close when clicking the backdrop (outside the content card)
+        mobileNav.addEventListener('click', function(e) {
+            if (e.target === mobileNav) {
+                closeNav();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+                closeNav();
+            }
         });
     }
 

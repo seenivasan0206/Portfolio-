@@ -27,13 +27,13 @@
                 }
             });
 
-            // 1. Badge bouncy spring drop
+            // 1. Badge fast and snappy entrance
             heroTL.from('.hero-badge', {
-                y: -24,
+                y: -12,
                 opacity: 0,
-                scale: 0.85,
-                duration: 0.75,
-                ease: 'back.out(1.8)'
+                scale: 0.9,
+                duration: 0.45,
+                ease: 'power3.out'
             })
             // 2. Title components: crisp staggered rise
             .from('.hero-greeting, .hero-name, .hero-role-text', {
